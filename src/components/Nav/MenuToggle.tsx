@@ -10,7 +10,7 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
   <button
     title="menu"
     onClick={toggle}
-    className="fixed z-10 top-12 right-12 border-none outline-none focus:outline-none bg-transparent"
+    className="fixed z-10 top-6 md:top-12 right-6 md:right-12 border-none outline-none focus:outline-none bg-transparent"
   >
     <svg width="46" height="46" viewBox="0 0 23 23">
       <Path

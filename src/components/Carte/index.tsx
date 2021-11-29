@@ -20,6 +20,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   if (!carte.image) return null;
   return (
     <div className="relative min-h-screen" data-scroll-section>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={carte.image?.url}
         alt="fond de carte"

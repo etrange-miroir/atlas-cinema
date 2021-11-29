@@ -17,7 +17,7 @@ const Footer = () => {
   }, [changeLocale]);
 
   return (
-    <footer className="fixed w-screen bottom-0 h-16 flex justify-between items-center px-12">
+    <footer className="fixed w-screen bottom-0 h-16 flex justify-between items-center px-6 md:px-12">
       <div className="text-lg text-white">
         <button
           className={currentLocale === 'fr' ? 'underline' : 'no-underline'}

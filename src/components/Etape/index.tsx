@@ -11,9 +11,14 @@ type CarteRatio = {
 };
 
 const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio?: CarteRatio }) => {
+  const [isMobile, setIsMobile] = useState(false);
   const [top, setTop] = useState<number | undefined>(undefined);
   const [left, setLeft] = useState<number | undefined>(undefined);
   const [isHovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   useEffect(() => {
     if (carteRatio && etape.marqueur) {
@@ -47,7 +52,7 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio?: CarteRa
           width={etape.marqueur.width}
           height={etape.marqueur.height}
         />
-        {isHovered && (
+        {(isHovered || isMobile) && (
           <motion.div
             className="text-lg text-black bg-white p-3 rounded-md"
             initial={{ opacity: 0 }}

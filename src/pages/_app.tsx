@@ -17,7 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         getDirection: true,
         getSpeed: true,
         direction: 'horizontal',
-        // ... all available Locomotive Scroll instance options
+        tablet: { smooth: true, getDirection: true, getSpeed: true, direction: 'horizontal' },
+        smartphone: { smooth: true, getDirection: true, getSpeed: true, direction: 'horizontal' },
       }}
       watch={
         [

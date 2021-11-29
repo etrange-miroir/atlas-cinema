@@ -15,7 +15,7 @@ const Home: NextPage<{
   carte: CarteRecord;
 }> = ({ etapes, carte }) => {
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="h-screen relative">
       <Head>
         <title>Atlas Cinema</title>
         <meta name="description" content="Atlas Cinema" />
