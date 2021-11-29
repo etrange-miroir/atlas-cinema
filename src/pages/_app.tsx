@@ -17,8 +17,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         getDirection: true,
         getSpeed: true,
         direction: 'horizontal',
-        tablet: { smooth: true, getDirection: true, getSpeed: true, direction: 'horizontal' },
-        smartphone: { smooth: true, getDirection: true, getSpeed: true, direction: 'horizontal' },
+        tablet: {
+          smooth: true,
+          getDirection: true,
+          getSpeed: true,
+          direction: 'horizontal',
+          multiplier: 2,
+        },
+        smartphone: {
+          smooth: true,
+          getDirection: true,
+          getSpeed: true,
+          direction: 'horizontal',
+          multiplier: 2,
+        },
       }}
       watch={
         [
