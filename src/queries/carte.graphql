@@ -1,0 +1,9 @@
+query getCarte {
+  carte {
+    image {
+      url
+      width
+      height
+    }
+  }
+}

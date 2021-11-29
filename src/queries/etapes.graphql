@@ -1,0 +1,26 @@
+query getEtapes($locale: SiteLocale) {
+  etapes: allEtapes(locale: $locale) {
+    coordonnees {
+      coordX
+      coordY
+    }
+    date
+    description(locale: $locale)
+    images {
+      blurhash
+      url
+    }
+    liens {
+      lien
+    }
+    lieu
+    nom
+    off
+    marqueur {
+      width
+      height
+      url
+      blurhash
+    }
+  }
+}
