@@ -24,7 +24,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       <img
         src={carte.image?.url}
         alt="fond de carte"
-        className="min-h-screen max-w-none"
+        className="min-h-screen max-h-screen max-w-none"
         ref={carteRef}
       />
       {etapes.map((etape, index) => {
