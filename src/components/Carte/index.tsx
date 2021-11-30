@@ -1,44 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-
-import { useLocomotiveScroll } from 'react-locomotive-scroll';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
+import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
 
 import Etape from '../Etape';
 
+export type CarteRatio = { ratioX: number; ratioY: number };
+
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
-  const { scroll } = useLocomotiveScroll();
   const carteRef = useRef<HTMLImageElement>(null);
+  const scrollRef = useHorizontalScroll();
+  const [ratio, setRatio] = useState<CarteRatio | undefined>();
 
   useEffect(() => {
-    if (scroll && carteRef.current) {
-      const carteWidth = carteRef.current.getBoundingClientRect().width;
-      scroll.scrollTo(carteWidth / 2 - window.innerWidth / 2, { duration: 0, disableLerp: true });
+    if (carteRef.current && scrollRef.current) {
+      scrollRef.current.scrollTo({
+        left: carteRef.current.getBoundingClientRect().width / 2 - window.innerWidth / 2,
+      });
     }
-  }, [scroll]);
+  }, [carteRef, scrollRef]);
+
+  useEffect(() => {
+    if (carteRef.current && carte.image) {
+      setRatio({
+        ratioX: carteRef.current.getBoundingClientRect().width / carte.image.width,
+        ratioY: carteRef.current.getBoundingClientRect().height / carte.image.height,
+      });
+    }
+  }, [carte.image, carte.image?.height, carte.image?.width, carteRef]);
 
   if (!carte.image) return null;
   return (
-    <div className="relative min-h-screen" data-scroll-section>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={carte.image?.url}
-        alt="fond de carte"
-        className="min-h-screen max-h-screen max-w-none"
-        ref={carteRef}
-      />
-      {etapes.map((etape, index) => {
-        return (
-          <Etape
-            key={index}
-            etape={etape}
-            carteRatio={{
-              W: (carteRef.current?.getBoundingClientRect().width ?? 0) / carte.image?.width,
-              H: (carteRef.current?.getBoundingClientRect().height ?? 0) / carte.image?.height,
-            }}
-          />
-        );
-      })}
+    <div
+      className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
+      ref={scrollRef}
+    >
+      <div className="relative md:absolute">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={carte.image?.url}
+          alt="fond de carte"
+          className="h-screen max-w-none"
+          ref={carteRef}
+        />
+        {ratio &&
+          etapes.map((etape, index) => {
+            return <Etape key={index} etape={etape} carteRatio={ratio} />;
+          })}
+      </div>
     </div>
   );
 };

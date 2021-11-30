@@ -5,12 +5,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { CoordonneeRecord, EtapeRecord } from '~/generated/sdk';
 
-type CarteRatio = {
-  W: number;
-  H: number;
-};
+import { CarteRatio } from '../Carte';
 
-const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio?: CarteRatio }) => {
+const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRatio }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [top, setTop] = useState<number | undefined>(undefined);
   const [left, setLeft] = useState<number | undefined>(undefined);
@@ -21,10 +18,10 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio?: CarteRa
   }, []);
 
   useEffect(() => {
-    if (carteRatio && etape.marqueur) {
+    if (etape.marqueur) {
       const { coordX, coordY } = (etape.coordonnees as CoordonneeRecord[])[0];
-      setTop(carteRatio.H * coordY - etape.marqueur?.height / 2);
-      setLeft(carteRatio.W * coordX - etape.marqueur?.width / 2);
+      setTop(carteRatio.ratioY * coordY - etape.marqueur.height / 2);
+      setLeft(carteRatio.ratioX * coordX - etape.marqueur.width / 2);
     }
   }, [
     carteRatio,

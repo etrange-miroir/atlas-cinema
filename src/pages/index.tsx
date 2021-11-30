@@ -15,7 +15,7 @@ const Home: NextPage<{
   carte: CarteRecord;
 }> = ({ etapes, carte }) => {
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative overflow-hidden m-0 p-0">
       <Head>
         <title>Atlas Cinema</title>
         <meta name="description" content="Atlas Cinema" />
