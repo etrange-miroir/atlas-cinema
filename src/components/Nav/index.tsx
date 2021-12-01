@@ -59,7 +59,7 @@ const Nav = () => {
   return (
     <motion.div initial="closed" animate={isOpen ? 'open' : 'closed'}>
       <motion.div
-        className="fixed z-10 inset-0 flex justify-center items-center bg-white"
+        className="fixed z-30 inset-0 flex justify-center items-center bg-white"
         variants={sidebar}
       >
         <motion.ul className="h-1/3 flex flex-col justify-between items-center" variants={menu}>
