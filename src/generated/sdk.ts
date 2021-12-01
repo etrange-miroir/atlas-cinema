@@ -49,6 +49,7 @@ export type CarteRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  barre?: Maybe<FileField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
@@ -367,6 +368,8 @@ export type ImgixParams = {
    * Specifies an aspect ratio to maintain when resizing and cropping the image
    *
    * Depends on: `fit=crop`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/ar)
    */
   ar?: InputMaybe<Scalars['String']>;
   /**
@@ -533,6 +536,8 @@ export type ImgixParams = {
    * Sets bottom border of an image.
    *
    * Depends on: `border`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-bottom)
    */
   borderBottom?: InputMaybe<Scalars['IntType']>;
   /**
@@ -541,6 +546,8 @@ export type ImgixParams = {
    * Sets left border of an image.
    *
    * Depends on: `border`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-left)
    */
   borderLeft?: InputMaybe<Scalars['IntType']>;
   /**
@@ -569,6 +576,8 @@ export type ImgixParams = {
    * Sets right border of an image.
    *
    * Depends on: `border`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-right)
    */
   borderRight?: InputMaybe<Scalars['IntType']>;
   /**
@@ -577,6 +586,8 @@ export type ImgixParams = {
    * Sets top border of an image.
    *
    * Depends on: `border`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-top)
    */
   borderTop?: InputMaybe<Scalars['IntType']>;
   /**
@@ -828,7 +839,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-z)
    */
-  fpZ?: InputMaybe<Scalars['IntType']>;
+  fpZ?: InputMaybe<Scalars['FloatType']>;
   /**
    * Gamma
    *
@@ -972,6 +983,14 @@ export type ImgixParams = {
    */
   markPad?: InputMaybe<Scalars['IntType']>;
   /**
+   * Watermark Rotation
+   *
+   * Rotates a watermark or tiled watermarks by a specified number of degrees.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-rot)
+   */
+  markRot?: InputMaybe<Scalars['FloatType']>;
+  /**
    * Watermark Scale
    *
    * Adjusts the scale of the watermark image.
@@ -981,6 +1000,16 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-scale)
    */
   markScale?: InputMaybe<Scalars['IntType']>;
+  /**
+   * Watermark Tile
+   *
+   * Adds tiled watermark.
+   *
+   * Depends on: `mark`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-tile)
+   */
+  markTile?: InputMaybe<ImgixParamsMarkTile>;
   /**
    * Watermark Width
    *
@@ -1113,24 +1142,32 @@ export type ImgixParams = {
    * Padding Bottom
    *
    * Sets bottom padding of an image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-bottom)
    */
   padBottom?: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Left
    *
    * Sets left padding of an image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-left)
    */
   padLeft?: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Right
    *
    * Sets right padding of an image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-right)
    */
   padRight?: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Top
    *
    * Sets top padding of an image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-top)
    */
   padTop?: InputMaybe<Scalars['IntType']>;
   /**
@@ -1138,7 +1175,7 @@ export type ImgixParams = {
    *
    * Selects a page from a PDF for display.
    *
-   * [Open Imgix reference »](https://docs.imgix.com/apis/url/pdf-page-number)
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/pdf/page)
    */
   page?: InputMaybe<Scalars['IntType']>;
   /**
@@ -1149,6 +1186,14 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/color-palette/palette)
    */
   palette?: InputMaybe<ImgixParamsPalette>;
+  /**
+   * Pdf Annotation
+   *
+   * Enables or disables PDF annotation.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/pdf/pdf-annotation)
+   */
+  pdfAnnotation?: InputMaybe<Scalars['BooleanType']>;
   /**
    * Css Prefix
    *
@@ -1229,6 +1274,8 @@ export type ImgixParams = {
    * Transparency
    *
    * Adds checkerboard behind images which support transparency.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/fill/transparency)
    */
   transparency?: InputMaybe<ImgixParamsTransparency>;
   /**
@@ -1576,6 +1623,8 @@ export enum ImgixParamsFlip {
 }
 
 export enum ImgixParamsFm {
+  avif = 'avif',
+  blurhash = 'blurhash',
   gif = 'gif',
   jp2 = 'jp2',
   jpg = 'jpg',
@@ -1605,6 +1654,10 @@ export enum ImgixParamsMarkFit {
   fill = 'fill',
   max = 'max',
   scale = 'scale',
+}
+
+export enum ImgixParamsMarkTile {
+  grid = 'grid',
 }
 
 export enum ImgixParamsPalette {
@@ -2325,6 +2378,15 @@ export type GetCarteQuery = {
             }
           | null
           | undefined;
+        barre?:
+          | {
+              __typename?: 'FileField';
+              url: string;
+              width?: any | null | undefined;
+              height?: any | null | undefined;
+            }
+          | null
+          | undefined;
       }
     | null
     | undefined;
@@ -2377,6 +2439,11 @@ export const GetCarteDocument = gql`
   query getCarte {
     carte {
       image {
+        url
+        width
+        height
+      }
+      barre {
         url
         width
         height

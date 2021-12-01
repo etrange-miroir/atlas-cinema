@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
@@ -35,6 +36,12 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
       ref={scrollRef}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={carte.barre?.url}
+        alt=""
+        className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2"
+      />
       <div className="relative md:absolute">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

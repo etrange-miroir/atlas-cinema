@@ -35,7 +35,7 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
   return (
     <AnimatePresence>
       <motion.div
-        className="absolute cursor-pointer"
+        className="absolute cursor-pointer z-20"
         style={{
           top,
           left,
@@ -46,6 +46,7 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
         <Image
           src={etape.marqueur.url}
           alt="marqueur"
+          layout="fixed"
           width={etape.marqueur.width}
           height={etape.marqueur.height}
         />

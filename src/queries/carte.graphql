@@ -5,5 +5,10 @@ query getCarte {
       width
       height
     }
+    barre {
+      url
+      width
+      height
+    }
   }
 }
