@@ -127,41 +127,46 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
 
   if (!carte.fond) return null;
   return (
-    <div
-      className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
-      ref={scrollRef}
-    >
-      <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row top-20">
-        <Year year={scrollYear} color={scrollColor} />
-      </div>
-      <svg viewBox="0 0 5 1080" className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2">
-        <line
-          x1="2.5"
-          y1="160.5"
-          x2="2.5"
-          y2="1077.5"
-          stroke={scrollColor}
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeDasharray="20 30"
-        />
-      </svg>
-      <div className="relative md:absolute">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={carte.fond?.url}
-          alt="fond de carte"
-          className="h-screen max-w-none"
-          ref={carteRef}
-        />
-        {renderEtapes()}
+    <>
+      <div
+        className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
+        ref={scrollRef}
+      >
+        <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row top-20">
+          <Year year={scrollYear} color={scrollColor} />
+        </div>
+        <svg
+          viewBox="0 0 5 1080"
+          className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2"
+        >
+          <line
+            x1="2.5"
+            y1="160.5"
+            x2="2.5"
+            y2="1077.5"
+            stroke={scrollColor}
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeDasharray="20 30"
+          />
+        </svg>
+        <div className="relative md:absolute">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={carte.fond?.url}
+            alt="fond de carte"
+            className="h-screen max-w-none"
+            ref={carteRef}
+          />
+          {renderEtapes()}
+        </div>
       </div>
       <EtapeDetail
         etape={selectedEtape}
         onDismiss={() => setSelectedEtape(undefined)}
         color={scrollColor}
       />
-    </div>
+    </>
   );
 };
 
