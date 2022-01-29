@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import chroma from 'chroma-js';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
 
 import Etape from '../Etape';
+import Year from '../Year';
 
 export type CarteRatio = { ratioX: number; ratioY: number };
 
@@ -119,21 +119,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       ref={scrollRef}
     >
       <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row text-4xl md:text-7xl font-ouroboros top-20">
-        <AnimatePresence>
-          <motion.p
-            key={scrollYear}
-            exit={{ y: 75, opacity: 0, position: 'absolute' }}
-            initial={{ y: -150, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              ease: 'easeOut',
-              duration: 0.3,
-            }}
-            style={{ color: scrollColor }}
-          >
-            {scrollYear}
-          </motion.p>
-        </AnimatePresence>
+        <Year year={scrollYear} color={scrollColor} />
       </div>
       <svg viewBox="0 0 5 1080" className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2">
         <line
