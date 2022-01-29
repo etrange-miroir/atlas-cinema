@@ -14,6 +14,7 @@ const Year = ({ year, color = 'black' }: { year: string; color?: string }) => {
           ease: 'easeOut',
           duration: 0.3,
         }}
+        className="text-4xl md:text-7xl font-ouroboros"
         style={{ color }}
       >
         {year}

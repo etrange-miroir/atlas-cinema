@@ -1753,8 +1753,9 @@ export type LienRecord = {
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  lien?: Maybe<Scalars['String']>;
+  titre?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
+  url?: Maybe<Scalars['String']>;
 };
 
 /** Record of type Lien (lien) */
@@ -2451,11 +2452,80 @@ export type GetEtapesQuery = {
       coordX?: any | null | undefined;
       coordY?: any | null | undefined;
     }>;
-    images: Array<{ __typename?: 'FileField'; blurhash?: string | null | undefined; url: string }>;
-    liens: Array<{ __typename?: 'LienRecord'; lien?: string | null | undefined }>;
+    images: Array<{
+      __typename?: 'FileField';
+      responsiveImage?:
+        | {
+            __typename?: 'ResponsiveImage';
+            srcSet: string;
+            webpSrcSet: string;
+            sizes: string;
+            src: string;
+            width: any;
+            height: any;
+            aspectRatio: any;
+            alt?: string | null | undefined;
+            title?: string | null | undefined;
+            bgColor?: string | null | undefined;
+            base64?: string | null | undefined;
+          }
+        | null
+        | undefined;
+    }>;
+    video?:
+      | {
+          __typename?: 'VideoField';
+          thumbnailUrl?: string | null | undefined;
+          url?: string | null | undefined;
+        }
+      | null
+      | undefined;
+    liens: Array<{
+      __typename?: 'LienRecord';
+      titre?: string | null | undefined;
+      url?: string | null | undefined;
+    }>;
   }>;
 };
 
+export type ImageFragment = {
+  __typename?: 'FileField';
+  responsiveImage?:
+    | {
+        __typename?: 'ResponsiveImage';
+        srcSet: string;
+        webpSrcSet: string;
+        sizes: string;
+        src: string;
+        width: any;
+        height: any;
+        aspectRatio: any;
+        alt?: string | null | undefined;
+        title?: string | null | undefined;
+        bgColor?: string | null | undefined;
+        base64?: string | null | undefined;
+      }
+    | null
+    | undefined;
+};
+
+export const ImageFragmentDoc = gql`
+  fragment Image on FileField {
+    responsiveImage(imgixParams: { fit: crop, w: 1000, h: 600, auto: format }) {
+      srcSet
+      webpSrcSet
+      sizes
+      src
+      width
+      height
+      aspectRatio
+      alt
+      title
+      bgColor
+      base64
+    }
+  }
+`;
 export const GetCarteDocument = gql`
   query getCarte {
     carte {
@@ -2496,13 +2566,17 @@ export const GetEtapesDocument = gql`
       }
       dateDeDebut
       dateDeFin
-      description(locale: $locale)
+      description(markdown: true, locale: $locale)
       images {
-        blurhash
+        ...Image
+      }
+      video {
+        thumbnailUrl
         url
       }
       liens {
-        lien
+        titre
+        url
       }
       lieu
       nom
@@ -2510,6 +2584,7 @@ export const GetEtapesDocument = gql`
       off
     }
   }
+  ${ImageFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(

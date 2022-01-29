@@ -6,6 +6,7 @@ import { CarteRecord, EtapeRecord } from '~/generated/sdk';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
 
 import Etape from '../Etape';
+import EtapeDetail from '../EtapeDetail';
 import Year from '../Year';
 
 export type CarteRatio = { ratioX: number; ratioY: number };
@@ -17,12 +18,13 @@ const DELTA_YEARS = END_YEAR - START_YEAR + 1;
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
   const carteRef = useRef<HTMLImageElement>(null);
   const scrollRef = useHorizontalScroll();
-  const [ratio, setRatio] = useState<CarteRatio | undefined>();
+  const [ratio, setRatio] = useState<CarteRatio>();
   const [scrollPct, setScrollPct] = useState(0.5);
-  const [scrollColor, setScrollColor] = useState<string | undefined>();
+  const [scrollColor, setScrollColor] = useState<string>();
   const [scrollYear, setScrollYear] = useState(
     `${START_YEAR + Math.floor(scrollPct * DELTA_YEARS)}`
   );
+  const [selectedEtape, setSelectedEtape] = useState<EtapeRecord>();
   // convenient memo to keep the gradient array computed
   const gradient = useMemo(() => {
     if (
@@ -107,7 +109,15 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         const color = chroma
           .scale(gradient)(etape.coordonnees[0].coordX / carte.fond!.width)
           .hex();
-        return <Etape key={index} etape={etape} carteRatio={ratio} color={color} />;
+        return (
+          <Etape
+            key={index}
+            etape={etape}
+            carteRatio={ratio}
+            color={color}
+            onClick={() => setSelectedEtape(etape)}
+          />
+        );
       });
     }
   }, [carte.fond, etapes, gradient, ratio]);
@@ -118,7 +128,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
       ref={scrollRef}
     >
-      <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row text-4xl md:text-7xl font-ouroboros top-20">
+      <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row top-20">
         <Year year={scrollYear} color={scrollColor} />
       </div>
       <svg viewBox="0 0 5 1080" className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2">
@@ -143,6 +153,11 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         />
         {renderEtapes()}
       </div>
+      <EtapeDetail
+        etape={selectedEtape}
+        onDismiss={() => setSelectedEtape(undefined)}
+        color={scrollColor}
+      />
     </div>
   );
 };

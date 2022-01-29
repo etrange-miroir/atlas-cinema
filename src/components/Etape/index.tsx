@@ -31,10 +31,12 @@ const Etape = ({
   etape,
   carteRatio,
   color,
+  onClick,
 }: {
   etape: EtapeRecord;
   carteRatio: CarteRatio;
   color: string;
+  onClick: () => void;
 }) => {
   const dateRangeCopy = useDateRangeCopy(etape);
   const isMobile = useIsMobile();
@@ -58,6 +60,7 @@ const Etape = ({
         }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
+        onClick={onClick}
       >
         {etape.off ? (
           <MarqueurOff color={color} size={MARKER_SIZE} />

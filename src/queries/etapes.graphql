@@ -6,13 +6,17 @@ query getEtapes($locale: SiteLocale) {
     }
     dateDeDebut
     dateDeFin
-    description(locale: $locale)
+    description(markdown: true, locale: $locale)
     images {
-      blurhash
+      ...Image
+    }
+    video {
+      thumbnailUrl
       url
     }
     liens {
-      lien
+      titre
+      url
     }
     lieu
     nom
