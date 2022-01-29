@@ -18,8 +18,5 @@ query getEtapes($locale: SiteLocale) {
     nom
     sousTitre
     off
-    couleur {
-      hex
-    }
   }
 }

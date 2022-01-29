@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -27,7 +27,15 @@ const item = {
 
 const MARKER_SIZE = 80;
 
-const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRatio }) => {
+const Etape = ({
+  etape,
+  carteRatio,
+  color,
+}: {
+  etape: EtapeRecord;
+  carteRatio: CarteRatio;
+  color: string;
+}) => {
   const dateRangeCopy = useDateRangeCopy(etape);
   const isMobile = useIsMobile();
   const [top, setTop] = useState<number | undefined>(undefined);
@@ -52,9 +60,9 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
         onHoverEnd={() => setHovered(false)}
       >
         {etape.off ? (
-          <MarqueurOff etape={etape} size={MARKER_SIZE} />
+          <MarqueurOff color={color} size={MARKER_SIZE} />
         ) : (
-          <MarqueurEtape etape={etape} size={MARKER_SIZE} />
+          <MarqueurEtape color={color} size={MARKER_SIZE} />
         )}
         <div
           className="relative -translate-x-1/2 md:max-w-md mt-1 text-center"
@@ -63,7 +71,7 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
           <span
             className="text-2xl md:text-5xl font-ouroboros text-center"
             style={{
-              color: etape.couleur?.hex as string,
+              color,
               lineHeight: isMobile ? 'unset' : '3.5rem',
             }}
           >
@@ -81,14 +89,14 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
             <motion.div
               variants={item}
               className="font-ouroboros text-lg md:text-3xl"
-              style={{ color: etape.couleur?.hex as string }}
+              style={{ color }}
             >
               {etape.sousTitre}
             </motion.div>
             <motion.div
               variants={item}
               className="font-ouroboros text-lg md:text-3xl"
-              style={{ color: etape.couleur?.hex as string }}
+              style={{ color }}
             >
               {dateRangeCopy}
             </motion.div>

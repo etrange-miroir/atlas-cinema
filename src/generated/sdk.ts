@@ -96,12 +96,6 @@ export type ColorField = {
   red?: Maybe<Scalars['IntType']>;
 };
 
-/** Specifies how to filter Color fields */
-export type ColorFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-};
-
 /** Record of type Coordonnée (coordonnee) */
 export type CoordonneeRecord = {
   __typename?: 'CoordonneeRecord';
@@ -174,7 +168,6 @@ export type EtapeModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  couleur?: InputMaybe<ColorFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   dateDeDebut?: InputMaybe<DateFilter>;
   dateDeFin?: InputMaybe<DateFilter>;
@@ -243,7 +236,6 @@ export type EtapeRecord = {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   coordonnees: Array<CoordonneeRecord>;
-  couleur?: Maybe<ColorField>;
   createdAt: Scalars['DateTime'];
   dateDeDebut?: Maybe<Scalars['Date']>;
   dateDeFin?: Maybe<Scalars['Date']>;
@@ -2471,7 +2463,6 @@ export type GetEtapesQuery = {
     }>;
     images: Array<{ __typename?: 'FileField'; blurhash?: string | null | undefined; url: string }>;
     liens: Array<{ __typename?: 'LienRecord'; lien?: string | null | undefined }>;
-    couleur?: { __typename?: 'ColorField'; hex?: string | null | undefined } | null | undefined;
   }>;
 };
 
@@ -2532,9 +2523,6 @@ export const GetEtapesDocument = gql`
       nom
       sousTitre
       off
-      couleur {
-        hex
-      }
     }
   }
 `;

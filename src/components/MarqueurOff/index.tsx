@@ -2,14 +2,12 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
-import { EtapeRecord } from '~/generated/sdk';
-
-export const MarqueurOff = ({ etape, size }: { etape: EtapeRecord; size: number }) => {
+export const MarqueurOff = ({ color, size }: { color?: string; size: number }) => {
   return (
     <motion.svg
       viewBox="0 0 20 21"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: size, height: size, fill: etape.couleur?.hex as string }}
+      style={{ width: size, height: size, fill: color }}
     >
       <path
         clipRule="evenodd"
