@@ -18,7 +18,6 @@ const EtapeDetail = ({
   color?: string;
 }) => {
   const dateRangeCopy = useDateRangeCopy(etape);
-  console.log(etape);
   return (
     <AnimatePresence>
       {etape && (

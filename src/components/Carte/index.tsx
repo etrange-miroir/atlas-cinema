@@ -19,7 +19,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   const carteRef = useRef<HTMLImageElement>(null);
   const scrollRef = useHorizontalScroll();
   const [ratio, setRatio] = useState<CarteRatio>();
-  const [scrollPct, setScrollPct] = useState(0.5);
+  const [scrollPct, setScrollPct] = useState((new Date().getFullYear() - START_YEAR) / DELTA_YEARS);
   const [scrollColor, setScrollColor] = useState<string>();
   const [scrollYear, setScrollYear] = useState(
     `${START_YEAR + Math.floor(scrollPct * DELTA_YEARS)}`
@@ -48,9 +48,12 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   useEffect(() => {
     if (carteRef.current && scrollRef.current) {
       scrollRef.current.scrollTo({
-        left: carteRef.current.getBoundingClientRect().width / 2 - window.innerWidth / 2,
+        left:
+          carteRef.current.getBoundingClientRect().width * scrollPct - window.innerWidth / 2 + 1,
       });
     }
+    // the missing dep is intended
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carteRef, scrollRef]);
 
   // keep track of scroll pct
@@ -86,7 +89,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         setScrollYear(`${computedYear} +`);
         break;
       default:
-        setScrollYear(`${computedYear}`);
+        setScrollYear(`&nbsp;&nbsp;${computedYear}&nbsp;&nbsp;`);
         break;
     }
   }, [scrollPct]);

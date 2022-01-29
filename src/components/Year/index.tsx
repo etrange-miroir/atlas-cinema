@@ -16,9 +16,8 @@ const Year = ({ year, color = 'black' }: { year: string; color?: string }) => {
         }}
         className="text-4xl md:text-7xl font-ouroboros"
         style={{ color }}
-      >
-        {year}
-      </motion.p>
+        dangerouslySetInnerHTML={{ __html: year }}
+      />
     </AnimatePresence>
   );
 };
