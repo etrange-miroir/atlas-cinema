@@ -49,7 +49,6 @@ export type CarteRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  barre?: Maybe<FileField>;
   createdAt: Scalars['DateTime'];
   fond?: Maybe<FileField>;
   gradient0?: Maybe<ColorField>;
@@ -2407,15 +2406,6 @@ export type GetCarteQuery = {
             }
           | null
           | undefined;
-        barre?:
-          | {
-              __typename?: 'FileField';
-              url: string;
-              width?: any | null | undefined;
-              height?: any | null | undefined;
-            }
-          | null
-          | undefined;
         gradient0?:
           | { __typename?: 'ColorField'; hex?: string | null | undefined }
           | null
@@ -2475,11 +2465,6 @@ export const GetCarteDocument = gql`
         height
       }
       grille {
-        url
-        width
-        height
-      }
-      barre {
         url
         width
         height

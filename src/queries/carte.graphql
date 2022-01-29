@@ -10,11 +10,6 @@ query getCarte {
       width
       height
     }
-    barre {
-      url
-      width
-      height
-    }
     gradient0 {
       hex
     }
