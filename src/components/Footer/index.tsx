@@ -27,7 +27,7 @@ const Footer = () => {
   }, [setCaptionVisible]);
 
   return (
-    <footer className="fixed z-30 w-screen bottom-0 h-16 flex justify-between items-center px-6 md:px-12">
+    <footer className="fixed z-50 w-screen bottom-0 h-16 flex justify-between items-center px-6 md:px-12">
       <div className="text-lg text-white">
         <button
           className={`font-plex ${currentLocale === 'fr' ? 'underline' : 'no-underline'}`}

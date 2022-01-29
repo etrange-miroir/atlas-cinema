@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import chroma from 'chroma-js';
+import { AnimatePresence, motion } from 'framer-motion';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
+import { useIsMobile } from '~/utils/useIsMobile';
 
 import Etape from '../Etape';
 import EtapeDetail from '../EtapeDetail';
@@ -16,7 +19,9 @@ const END_YEAR = 2028;
 const DELTA_YEARS = END_YEAR - START_YEAR + 1;
 
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
+  const isMobile = useIsMobile();
   const carteRef = useRef<HTMLImageElement>(null);
+  const [carteLoaded, setCarteLoaded] = useState(false);
   const scrollRef = useHorizontalScroll();
   const [ratio, setRatio] = useState<CarteRatio>();
   const [scrollPct, setScrollPct] = useState((new Date().getFullYear() - START_YEAR) / DELTA_YEARS);
@@ -43,6 +48,14 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       ];
     }
   }, [carte.gradient0, carte.gradient100, carte.gradient25, carte.gradient50, carte.gradient75]);
+
+  // fake loading time
+  useEffect(() => {
+    const to = setTimeout(() => {
+      setCarteLoaded(true);
+    }, 3000);
+    return () => clearTimeout(to);
+  }, []);
 
   // scroll to the center of the carte.fond on mount
   useEffect(() => {
@@ -107,7 +120,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
 
   // only render etapes once ratio, gradient and carte.fond are here
   const renderEtapes = useCallback(() => {
-    if (ratio && gradient && carte.fond) {
+    if (ratio && gradient && carte.fond && carteLoaded) {
       return etapes.map((etape, index) => {
         const color = chroma
           .scale(gradient)(etape.coordonnees[0].coordX / carte.fond!.width)
@@ -123,7 +136,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         );
       });
     }
-  }, [carte.fond, etapes, gradient, ratio]);
+  }, [carte.fond, carteLoaded, etapes, gradient, ratio]);
 
   if (!carte.fond) return null;
   return (
@@ -132,6 +145,18 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
         ref={scrollRef}
       >
+        <AnimatePresence>
+          {!carteLoaded && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-30 bg-black flex justify-center items-center"
+            >
+              <BounceLoader color="white" size={isMobile ? 180 : 240} />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row top-20">
           <Year year={scrollYear} color={scrollColor} />
         </div>

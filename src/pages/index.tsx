@@ -22,7 +22,7 @@ const Home: NextPage<{
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Logo className="fixed z-30 h-10 md:h-24 top-6 md:top-12 left-6 md:left-12" />
+        <Logo className="fixed z-50 h-10 md:h-24 top-6 md:top-12 left-6 md:left-12" />
         <Carte carte={carte} etapes={etapes} />
         <Footer />
       </main>
