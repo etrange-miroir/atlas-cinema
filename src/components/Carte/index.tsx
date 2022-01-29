@@ -137,7 +137,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         </div>
         <svg
           viewBox="0 0 5 1080"
-          className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2"
+          className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2 translate-y-5 md:translate-y-0"
         >
           <line
             x1="2.5"
