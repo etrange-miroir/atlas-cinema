@@ -22,15 +22,15 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   }, [carteRef, scrollRef]);
 
   useEffect(() => {
-    if (carteRef.current && carte.image) {
+    if (carteRef.current && carte.fond) {
       setRatio({
-        ratioX: carteRef.current.getBoundingClientRect().width / carte.image.width,
-        ratioY: carteRef.current.getBoundingClientRect().height / carte.image.height,
+        ratioX: carteRef.current.getBoundingClientRect().width / carte.fond.width,
+        ratioY: carteRef.current.getBoundingClientRect().height / carte.fond.height,
       });
     }
-  }, [carte.image, carte.image?.height, carte.image?.width, carteRef]);
+  }, [carte.fond, carte.fond?.height, carte.fond?.width, carteRef]);
 
-  if (!carte.image) return null;
+  if (!carte.fond) return null;
   return (
     <div
       className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
@@ -45,7 +45,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       <div className="relative md:absolute">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={carte.image?.url}
+          src={carte.fond?.url}
           alt="fond de carte"
           className="h-screen max-w-none"
           ref={carteRef}
