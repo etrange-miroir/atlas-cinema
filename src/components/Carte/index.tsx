@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import chroma from 'chroma-js';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
@@ -9,11 +10,19 @@ import Etape from '../Etape';
 
 export type CarteRatio = { ratioX: number; ratioY: number };
 
+const START_YEAR = 2019;
+const END_YEAR = 2028;
+const DELTA_YEARS = END_YEAR - START_YEAR + 1;
+
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
   const carteRef = useRef<HTMLImageElement>(null);
   const scrollRef = useHorizontalScroll();
   const [ratio, setRatio] = useState<CarteRatio | undefined>();
-  const [barreColor, setBarreColor] = useState<string | undefined>();
+  const [scrollPct, setScrollPct] = useState(0.5);
+  const [scrollColor, setScrollColor] = useState<string | undefined>();
+  const [scrollYear, setScrollYear] = useState(
+    `${START_YEAR + Math.floor(scrollPct * DELTA_YEARS)}`
+  );
   // convenient memo to keep the gradient array computed
   const gradient = useMemo(() => {
     if (
@@ -42,7 +51,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
     }
   }, [carteRef, scrollRef]);
 
-  // keep track of scroll to change the color of the barre
+  // keep track of scroll pct
   useEffect(() => {
     if (carteRef.current !== null && scrollRef.current) {
       const scrollDiv = scrollRef.current;
@@ -50,7 +59,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       const handleScroll = (e: Event) => {
         const target = e.target as HTMLDivElement;
         const pct = (target.scrollLeft + target.clientWidth / 2) / carteWidth;
-        setBarreColor(chroma.scale(gradient)(pct).hex());
+        setScrollPct(pct);
       };
       scrollDiv.addEventListener('scroll', handleScroll);
       return () => {
@@ -58,6 +67,27 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       };
     }
   }, [carteRef, gradient, scrollRef]);
+
+  // use scroll pct to change color of the barre
+  useEffect(() => {
+    setScrollColor(chroma.scale(gradient)(scrollPct).hex());
+  }, [gradient, scrollPct]);
+
+  // use scroll pct to change year
+  useEffect(() => {
+    const computedYear = START_YEAR + Math.floor(scrollPct * DELTA_YEARS);
+    switch (computedYear) {
+      case START_YEAR:
+        setScrollYear(`${computedYear} -`);
+        break;
+      case END_YEAR:
+        setScrollYear(`${computedYear} +`);
+        break;
+      default:
+        setScrollYear(`${computedYear}`);
+        break;
+    }
+  }, [scrollPct]);
 
   // once the carte.fond is rendered, compute the display ratio
   // that will then serve to place etape at the right spot
@@ -88,13 +118,30 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
       className="relative h-screen overflow-x-auto md:overflow-x-hidden overflow-y-hidden"
       ref={scrollRef}
     >
+      <div className="fixed z-10 left-1/2 transform -translate-x-1/2 flex flex-row text-4xl md:text-7xl font-ouroboros top-20">
+        <AnimatePresence>
+          <motion.p
+            key={scrollYear}
+            exit={{ y: 75, opacity: 0, position: 'absolute' }}
+            initial={{ y: -150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              ease: 'easeOut',
+              duration: 0.3,
+            }}
+            style={{ color: scrollColor }}
+          >
+            {scrollYear}
+          </motion.p>
+        </AnimatePresence>
+      </div>
       <svg viewBox="0 0 5 1080" className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2">
         <line
           x1="2.5"
           y1="160.5"
           x2="2.5"
           y2="1077.5"
-          stroke={barreColor}
+          stroke={scrollColor}
           strokeWidth="5"
           strokeLinecap="round"
           strokeDasharray="20 30"
