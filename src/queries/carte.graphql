@@ -1,6 +1,11 @@
 query getCarte {
   carte {
-    image {
+    fond {
+      url
+      width
+      height
+    }
+    grille {
       url
       width
       height
@@ -9,6 +14,21 @@ query getCarte {
       url
       width
       height
+    }
+    gradient0 {
+      hex
+    }
+    gradient100 {
+      hex
+    }
+    gradient25 {
+      hex
+    }
+    gradient50 {
+      hex
+    }
+    gradient75 {
+      hex
     }
   }
 }

@@ -4,7 +4,8 @@ query getEtapes($locale: SiteLocale) {
       coordX
       coordY
     }
-    date
+    dateDeDebut
+    dateDeFin
     description(locale: $locale)
     images {
       blurhash
@@ -15,12 +16,10 @@ query getEtapes($locale: SiteLocale) {
     }
     lieu
     nom
+    sousTitre
     off
-    marqueur {
-      width
-      height
-      url
-      blurhash
+    couleur {
+      hex
     }
   }
 }

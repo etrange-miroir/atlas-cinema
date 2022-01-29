@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'plex';
+  src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2'), url('/fonts/IBMPlexMono-Regular.woff') format('woff');
+  font-style: 'normal';
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'plex';
+  src: url('/fonts/IBMPlexMono-Bold.woff2') format('woff2'), url('/fonts/IBMPlexMono-Bold.woff') format('woff');
+  font-style: 'normal';
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'ouroboros';
+  src: url('/fonts/Ouroboros-Regular.woff2') format('woff2'), url('/fonts/Ouroboros-Regular.woff') format('woff');
+  font-style: 'normal';
+  font-weight: 400;
+}
+
 html,
 body {
   padding: 0;

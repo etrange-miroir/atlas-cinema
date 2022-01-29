@@ -51,8 +51,14 @@ export type CarteRecord = {
   _updatedAt: Scalars['DateTime'];
   barre?: Maybe<FileField>;
   createdAt: Scalars['DateTime'];
+  fond?: Maybe<FileField>;
+  gradient0?: Maybe<ColorField>;
+  gradient25?: Maybe<ColorField>;
+  gradient50?: Maybe<ColorField>;
+  gradient75?: Maybe<ColorField>;
+  gradient100?: Maybe<ColorField>;
+  grille?: Maybe<FileField>;
   id: Scalars['ItemId'];
-  image?: Maybe<FileField>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -88,6 +94,12 @@ export type ColorField = {
   green?: Maybe<Scalars['IntType']>;
   hex?: Maybe<Scalars['String']>;
   red?: Maybe<Scalars['IntType']>;
+};
+
+/** Specifies how to filter Color fields */
+export type ColorFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
 };
 
 /** Record of type Coordonnée (coordonnee) */
@@ -162,15 +174,17 @@ export type EtapeModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  couleur?: InputMaybe<ColorFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
-  date?: InputMaybe<DateFilter>;
+  dateDeDebut?: InputMaybe<DateFilter>;
+  dateDeFin?: InputMaybe<DateFilter>;
   description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
   images?: InputMaybe<GalleryFilter>;
   lieu?: InputMaybe<StringFilter>;
-  marqueur?: InputMaybe<FileFilter>;
   nom?: InputMaybe<StringFilter>;
   off?: InputMaybe<BooleanFilter>;
+  sousTitre?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
   video?: InputMaybe<VideoFilter>;
 };
@@ -194,8 +208,10 @@ export enum EtapeModelOrderBy {
   _updatedAt_DESC = '_updatedAt_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
-  date_ASC = 'date_ASC',
-  date_DESC = 'date_DESC',
+  dateDeDebut_ASC = 'dateDeDebut_ASC',
+  dateDeDebut_DESC = 'dateDeDebut_DESC',
+  dateDeFin_ASC = 'dateDeFin_ASC',
+  dateDeFin_DESC = 'dateDeFin_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
   lieu_ASC = 'lieu_ASC',
@@ -204,6 +220,8 @@ export enum EtapeModelOrderBy {
   nom_DESC = 'nom_DESC',
   off_ASC = 'off_ASC',
   off_DESC = 'off_DESC',
+  sousTitre_ASC = 'sousTitre_ASC',
+  sousTitre_DESC = 'sousTitre_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
   updatedAt_DESC = 'updatedAt_DESC',
 }
@@ -212,6 +230,7 @@ export enum EtapeModelOrderBy {
 export type EtapeRecord = {
   __typename?: 'EtapeRecord';
   _allDescriptionLocales?: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _allNomLocales?: Maybe<Array<Maybe<StringMultiLocaleField>>>;
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -223,17 +242,19 @@ export type EtapeRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  coordonnees?: Maybe<Array<Maybe<CoordonneeRecord>>>;
+  coordonnees: Array<CoordonneeRecord>;
+  couleur?: Maybe<ColorField>;
   createdAt: Scalars['DateTime'];
-  date?: Maybe<Scalars['Date']>;
+  dateDeDebut?: Maybe<Scalars['Date']>;
+  dateDeFin?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   images: Array<FileField>;
-  liens?: Maybe<Array<Maybe<LienRecord>>>;
+  liens: Array<LienRecord>;
   lieu?: Maybe<Scalars['String']>;
-  marqueur?: Maybe<FileField>;
   nom?: Maybe<Scalars['String']>;
   off?: Maybe<Scalars['BooleanType']>;
+  sousTitre?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
   video?: Maybe<VideoField>;
 };
@@ -245,6 +266,11 @@ export type EtapeRecord_AllDescriptionLocalesArgs = {
 };
 
 /** Record of type Étape (etape) */
+export type EtapeRecord_AllNomLocalesArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Record of type Étape (etape) */
 export type EtapeRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -253,6 +279,11 @@ export type EtapeRecord_SeoMetaTagsArgs = {
 export type EtapeRecordDescriptionArgs = {
   locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Record of type Étape (etape) */
+export type EtapeRecordNomArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 export enum FaviconType {
@@ -322,20 +353,6 @@ export type FileFieldTitleArgs = {
 
 export type FileFieldUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
-};
-
-/** Specifies how to filter Single-file/image fields */
-export type FileFilter = {
-  /** Search for records with an exact match. The specified value must be an Upload ID */
-  eq?: InputMaybe<Scalars['UploadId']>;
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-  /** Filter records that have one of the specified uploads */
-  in?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
-  /** Exclude records with an exact match. The specified value must be an Upload ID */
-  neq?: InputMaybe<Scalars['UploadId']>;
-  /** Filter records that do not have one of the specified uploads */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
 };
 
 /** Specifies how to filter Multiple files/images field */
@@ -904,6 +921,12 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/invert)
    */
   invert?: InputMaybe<Scalars['BooleanType']>;
+  /**
+   * Iptc Passthrough
+   *
+   * Determine if IPTC data should be passed for JPEG images.
+   */
+  iptc?: InputMaybe<ImgixParamsIptc>;
   /**
    * Lossless Compression
    *
@@ -1639,6 +1662,11 @@ export enum ImgixParamsFm {
   webp = 'webp',
 }
 
+export enum ImgixParamsIptc {
+  allow = 'allow',
+  block = 'block',
+}
+
 export enum ImgixParamsMarkAlign {
   bottom = 'bottom',
   center = 'center',
@@ -2369,7 +2397,16 @@ export type GetCarteQuery = {
   carte?:
     | {
         __typename?: 'CarteRecord';
-        image?:
+        fond?:
+          | {
+              __typename?: 'FileField';
+              url: string;
+              width?: any | null | undefined;
+              height?: any | null | undefined;
+            }
+          | null
+          | undefined;
+        grille?:
           | {
               __typename?: 'FileField';
               url: string;
@@ -2387,6 +2424,26 @@ export type GetCarteQuery = {
             }
           | null
           | undefined;
+        gradient0?:
+          | { __typename?: 'ColorField'; hex?: string | null | undefined }
+          | null
+          | undefined;
+        gradient100?:
+          | { __typename?: 'ColorField'; hex?: string | null | undefined }
+          | null
+          | undefined;
+        gradient25?:
+          | { __typename?: 'ColorField'; hex?: string | null | undefined }
+          | null
+          | undefined;
+        gradient50?:
+          | { __typename?: 'ColorField'; hex?: string | null | undefined }
+          | null
+          | undefined;
+        gradient75?:
+          | { __typename?: 'ColorField'; hex?: string | null | undefined }
+          | null
+          | undefined;
       }
     | null
     | undefined;
@@ -2400,45 +2457,33 @@ export type GetEtapesQuery = {
   __typename?: 'Query';
   etapes: Array<{
     __typename?: 'EtapeRecord';
-    date?: any | null | undefined;
+    dateDeDebut?: any | null | undefined;
+    dateDeFin?: any | null | undefined;
     description?: string | null | undefined;
     lieu?: string | null | undefined;
     nom?: string | null | undefined;
+    sousTitre?: string | null | undefined;
     off?: any | null | undefined;
-    coordonnees?:
-      | Array<
-          | {
-              __typename?: 'CoordonneeRecord';
-              coordX?: any | null | undefined;
-              coordY?: any | null | undefined;
-            }
-          | null
-          | undefined
-        >
-      | null
-      | undefined;
+    coordonnees: Array<{
+      __typename?: 'CoordonneeRecord';
+      coordX?: any | null | undefined;
+      coordY?: any | null | undefined;
+    }>;
     images: Array<{ __typename?: 'FileField'; blurhash?: string | null | undefined; url: string }>;
-    liens?:
-      | Array<{ __typename?: 'LienRecord'; lien?: string | null | undefined } | null | undefined>
-      | null
-      | undefined;
-    marqueur?:
-      | {
-          __typename?: 'FileField';
-          width?: any | null | undefined;
-          height?: any | null | undefined;
-          url: string;
-          blurhash?: string | null | undefined;
-        }
-      | null
-      | undefined;
+    liens: Array<{ __typename?: 'LienRecord'; lien?: string | null | undefined }>;
+    couleur?: { __typename?: 'ColorField'; hex?: string | null | undefined } | null | undefined;
   }>;
 };
 
 export const GetCarteDocument = gql`
   query getCarte {
     carte {
-      image {
+      fond {
+        url
+        width
+        height
+      }
+      grille {
         url
         width
         height
@@ -2447,6 +2492,21 @@ export const GetCarteDocument = gql`
         url
         width
         height
+      }
+      gradient0 {
+        hex
+      }
+      gradient100 {
+        hex
+      }
+      gradient25 {
+        hex
+      }
+      gradient50 {
+        hex
+      }
+      gradient75 {
+        hex
       }
     }
   }
@@ -2458,7 +2518,8 @@ export const GetEtapesDocument = gql`
         coordX
         coordY
       }
-      date
+      dateDeDebut
+      dateDeFin
       description(locale: $locale)
       images {
         blurhash
@@ -2469,12 +2530,10 @@ export const GetEtapesDocument = gql`
       }
       lieu
       nom
+      sousTitre
       off
-      marqueur {
-        width
-        height
-        url
-        blurhash
+      couleur {
+        hex
       }
     }
   }

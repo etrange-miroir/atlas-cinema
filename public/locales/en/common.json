@@ -1,3 +1,13 @@
 {
-  "caption": "Caption"
+  "caption": {
+    "title": "CAPTION",
+    "etape": {
+      "title": "STAGE",
+      "subtitle": "WORKSHOPS, SCREENING, BROADCASTING, ..."
+    },
+    "off": {
+      "title": "OFF",
+      "subtitle": "IN THE WILD SCREENINGS, GRAPHIC ESSAYS, LABS, ..."
+    }
+  }
 }

@@ -1,3 +1,13 @@
 {
-  "caption": "Légende"
+  "caption": {
+    "title": "LÉGENDE",
+    "etape": {
+      "title": "ÉTAPES",
+      "subtitle": "WORKSHOPS, PROJECTIONS, DIFFUSION, ETC."
+    },
+    "off": {
+      "title": "OFF",
+      "subtitle": "PROJECTIONS SAUVAGES, ESSAIS GRAPHIQUES, LABOS, ETC."
+    }
+  }
 }

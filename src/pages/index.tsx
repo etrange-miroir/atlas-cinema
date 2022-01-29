@@ -2,9 +2,9 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import Logo from '~/../public/images/logo.svg';
 import Carte from '~/components/Carte';
 import Footer from '~/components/Footer';
-import Nav from '~/components/Nav';
 import { CarteRecord, EtapeRecord, SiteLocale } from '~/generated/sdk';
 import { getApi } from '~/utils/api';
 import { AvailableLocale } from '~/utils/locales';
@@ -22,7 +22,7 @@ const Home: NextPage<{
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Nav />
+        <Logo className="fixed z-30 h-24 top-6 md:top-12 left-6 md:left-12" />
         <Carte carte={carte} etapes={etapes} />
         <Footer />
       </main>

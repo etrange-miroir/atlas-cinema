@@ -1,37 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { CoordonneeRecord, EtapeRecord } from '~/generated/sdk';
+import { useDateRangeCopy } from '~/utils/useDateRangeCopy';
+import { useIsMobile } from '~/utils/useIsMobile';
 
 import { CarteRatio } from '../Carte';
+import { MarqueurEtape } from '../MarqueurEtape';
+import { MarqueurOff } from '../MarqueurOff';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+const MARKER_SIZE = 80;
 
 const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRatio }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const dateRangeCopy = useDateRangeCopy(etape);
+  const isMobile = useIsMobile();
   const [top, setTop] = useState<number | undefined>(undefined);
   const [left, setLeft] = useState<number | undefined>(undefined);
   const [isHovered, setHovered] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    const { coordX, coordY } = (etape.coordonnees as CoordonneeRecord[])[0];
+    setTop(carteRatio.ratioY * coordY - MARKER_SIZE / 2);
+    setLeft(carteRatio.ratioX * coordX - MARKER_SIZE / 2);
+  }, [carteRatio, etape.coordonnees]);
 
-  useEffect(() => {
-    if (etape.marqueur) {
-      const { coordX, coordY } = (etape.coordonnees as CoordonneeRecord[])[0];
-      setTop(carteRatio.ratioY * coordY - etape.marqueur.height / 2);
-      setLeft(carteRatio.ratioX * coordX - etape.marqueur.width / 2);
-    }
-  }, [
-    carteRatio,
-    etape.coordonnees,
-    etape.marqueur,
-    etape.marqueur?.height,
-    etape.marqueur?.width,
-  ]);
-
-  if (!etape.marqueur) return null;
   return (
     <AnimatePresence>
       <motion.div
@@ -43,21 +51,47 @@ const Etape = ({ etape, carteRatio }: { etape: EtapeRecord; carteRatio: CarteRat
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
       >
-        <Image
-          src={etape.marqueur.url}
-          alt="marqueur"
-          layout="fixed"
-          width={etape.marqueur.width}
-          height={etape.marqueur.height}
-        />
-        {(isHovered || isMobile) && (
-          <motion.div
-            className="text-lg text-black bg-white p-3 rounded-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+        {etape.off ? (
+          <MarqueurOff etape={etape} size={MARKER_SIZE} />
+        ) : (
+          <MarqueurEtape etape={etape} size={MARKER_SIZE} />
+        )}
+        <div
+          className="relative -translate-x-1/2 md:max-w-md mt-1 text-center"
+          style={{ marginLeft: MARKER_SIZE / 2 }}
+        >
+          <span
+            className="text-2xl md:text-5xl font-ouroboros text-center"
+            style={{
+              color: etape.couleur?.hex as string,
+              lineHeight: isMobile ? 'unset' : '3.5rem',
+            }}
           >
             {etape.nom}
+          </span>
+        </div>
+        {(isHovered || isMobile) && (
+          <motion.div
+            className="mt-1 -translate-x-1/2 text-center w-52"
+            style={{ marginLeft: MARKER_SIZE / 2 }}
+            variants={container}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.div
+              variants={item}
+              className="font-ouroboros text-lg md:text-3xl"
+              style={{ color: etape.couleur?.hex as string }}
+            >
+              {etape.sousTitre}
+            </motion.div>
+            <motion.div
+              variants={item}
+              className="font-ouroboros text-lg md:text-3xl"
+              style={{ color: etape.couleur?.hex as string }}
+            >
+              {dateRangeCopy}
+            </motion.div>
           </motion.div>
         )}
       </motion.div>
