@@ -53,7 +53,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   useEffect(() => {
     const to = setTimeout(() => {
       setCarteLoaded(true);
-    }, 3000);
+    }, 5000);
     return () => clearTimeout(to);
   }, []);
 
@@ -162,11 +162,11 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         </div>
         <svg
           viewBox="0 0 5 1080"
-          className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2 translate-y-5 md:translate-y-0"
+          className="fixed h-screen z-10 left-1/2 transform -translate-x-1/2"
         >
           <line
             x1="2.5"
-            y1="160.5"
+            y1={isMobile ? 180 : 200}
             x2="2.5"
             y2="1077.5"
             stroke={scrollColor}
