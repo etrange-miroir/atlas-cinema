@@ -6809,7 +6809,7 @@ signedsource@^1.0.0:
   resolved "https://registry.yarnpkg.com/signedsource/-/signedsource-1.0.0.tgz#1ddace4981798f93bd833973803d80d52e93ad6a"
   integrity sha1-HdrOSYF5j5O9gzlzgD2A1S6TrWo=
 
-simplebar-react@^2.3.6:
+simplebar-react@2.3.6:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/simplebar-react/-/simplebar-react-2.3.6.tgz#27945a80b221caae8f241155cdba1bb6c201ebff"
   integrity sha512-Igm/MRdt+LQ8edTTzjRoaATfXPPMByuUsVvHQHrkX7SH4jmvL85VshtOVcXFrOBspv9vqQtnIrOq/j9VmRSNDQ==
