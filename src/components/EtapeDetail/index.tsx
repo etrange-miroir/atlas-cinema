@@ -28,7 +28,7 @@ const EtapeDetail = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed z-50 inset-6 bottom-12 md:inset-12 px-6 md:px-8 py-8 flex flex-col items-center"
+          className="fixed z-50 inset-6 bottom-12 md:inset-12 px-6 md:px-8 pb-8 pt-12 md:pt-8 flex flex-col items-center"
           style={{ backgroundColor: color }}
         >
           <button
@@ -37,7 +37,9 @@ const EtapeDetail = ({
           >
             X
           </button>
-          <h2 className="text-4xl md:text-7xl font-ouroboros mb-4">{etape.nom}</h2>
+          <h2 className="text-3xl md:text-5xl font-ouroboros mb-4 trunctate">
+            {etape.nom?.toUpperCase()}
+          </h2>
           <span className="text-xl md:text-3xl font-plex mb-6 md:mb-16">
             {etape.lieu} ~ {dateRangeCopy}
           </span>

@@ -72,13 +72,12 @@ const Etape = ({
           style={{ marginLeft: MARKER_SIZE / 2 }}
         >
           <span
-            className="text-2xl md:text-5xl font-ouroboros text-center"
+            className="text-xl md:text-3xl font-ouroboros text-center"
             style={{
               color,
-              lineHeight: isMobile ? 'unset' : '3.5rem',
             }}
           >
-            {etape.nom}
+            {etape.nom?.toUpperCase()}
           </span>
         </div>
         {(isHovered || isMobile) && (
@@ -91,17 +90,10 @@ const Etape = ({
           >
             <motion.div
               variants={item}
-              className="font-ouroboros text-lg md:text-3xl"
+              className="font-ouroboros text-base md:text-xl"
               style={{ color }}
             >
               {etape.sousTitre}
-            </motion.div>
-            <motion.div
-              variants={item}
-              className="font-ouroboros text-lg md:text-3xl"
-              style={{ color }}
-            >
-              {dateRangeCopy}
             </motion.div>
           </motion.div>
         )}

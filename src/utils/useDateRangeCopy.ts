@@ -21,33 +21,30 @@ export const useDateRangeCopy = (etape?: EtapeRecord) => {
         const sameMonth = isSameMonth(debut, fin);
         const sameYear = isSameYear(debut, fin);
         if (sameMonth && sameYear) {
-          const start = format(debut, 'd', {
+          const end = format(fin, 'MMMM yyyy', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           });
-          const end = format(fin, 'd MMMM yyyy', {
-            locale: i18n.language === 'fr' ? frLocale : enLocale,
-          });
-          setDateCopy(`${start}-${end}`);
+          setDateCopy(end);
         } else if (sameYear) {
-          const start = format(debut, 'd MMMM', {
+          const start = format(debut, 'MMMM', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           });
-          const end = format(fin, 'd MMMM yyyy', {
+          const end = format(fin, 'MMMM yyyy', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           });
           setDateCopy(`${start}-${end}`);
         } else {
-          const start = format(debut, 'd MMMM yyyy', {
+          const start = format(debut, 'MMMM yyyy', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           });
-          const end = format(fin, 'd MMMM yyyy', {
+          const end = format(fin, 'MMMM yyyy', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           });
           setDateCopy(`${start}-${end}`);
         }
       } else if (etape.dateDeDebut) {
         setDateCopy(
-          format(new Date(etape.dateDeDebut), 'd MMMM yyyy', {
+          format(new Date(etape.dateDeDebut), 'MMMM yyyy', {
             locale: i18n.language === 'fr' ? frLocale : enLocale,
           })
         );
