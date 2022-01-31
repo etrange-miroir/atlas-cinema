@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { CoordonneeRecord, EtapeRecord } from '~/generated/sdk';
-import { useDateRangeCopy } from '~/utils/useDateRangeCopy';
 import { useIsMobile } from '~/utils/useIsMobile';
 
 import { CarteRatio } from '../Carte';
@@ -38,11 +37,18 @@ const Etape = ({
   color: string;
   onClick: () => void;
 }) => {
-  const dateRangeCopy = useDateRangeCopy(etape);
   const isMobile = useIsMobile();
   const [top, setTop] = useState<number | undefined>(undefined);
   const [left, setLeft] = useState<number | undefined>(undefined);
   const [isHovered, setHovered] = useState(false);
+
+  const shouldShowTitle = useMemo(() => {
+    return !etape.off || isHovered || isMobile;
+  }, [etape.off, isHovered, isMobile]);
+
+  const shouldShowSubtitle = useMemo(() => {
+    return isHovered || isMobile;
+  }, [isHovered, isMobile]);
 
   useEffect(() => {
     const { coordX, coordY } = (etape.coordonnees as CoordonneeRecord[])[0];
@@ -67,20 +73,27 @@ const Etape = ({
         ) : (
           <MarqueurEtape color={color} size={MARKER_SIZE} />
         )}
-        <div
-          className="relative -translate-x-1/2 md:max-w-md mt-1 text-center"
-          style={{ marginLeft: MARKER_SIZE / 2 }}
-        >
-          <span
-            className="text-xl md:text-3xl font-ouroboros text-center"
-            style={{
-              color,
-            }}
-          >
-            {etape.nom?.toUpperCase()}
-          </span>
-        </div>
-        {(isHovered || isMobile) && (
+        {shouldShowTitle && (
+          <AnimatePresence>
+            <motion.div
+              className="relative -translate-x-1/2 md:max-w-md mt-1 text-center"
+              style={{ marginLeft: MARKER_SIZE / 2 }}
+              variants={item}
+              initial="hidden"
+              animate="show"
+            >
+              <span
+                className="text-xl md:text-3xl font-ouroboros text-center"
+                style={{
+                  color,
+                }}
+              >
+                {etape.nom?.toUpperCase()}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        )}
+        {shouldShowSubtitle && (
           <motion.div
             className="mt-1 -translate-x-1/2 text-center w-52"
             style={{ marginLeft: MARKER_SIZE / 2 }}
