@@ -69,9 +69,9 @@ const Etape = ({
         onClick={onClick}
       >
         {etape.off ? (
-          <MarqueurOff color={color} size={MARKER_SIZE} />
+          <MarqueurOff color={color} size={MARKER_SIZE} hovered={isHovered} />
         ) : (
-          <MarqueurEtape color={color} size={MARKER_SIZE} />
+          <MarqueurEtape color={color} size={MARKER_SIZE} hovered={isHovered} />
         )}
         {shouldShowTitle && (
           <AnimatePresence>
