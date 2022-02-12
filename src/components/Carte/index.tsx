@@ -19,10 +19,12 @@ export type CarteRatio = { ratioX: number; ratioY: number };
 const START_YEAR = 2019;
 const END_YEAR = 2028;
 const DELTA_YEARS = END_YEAR - START_YEAR + 1;
+const MIN_LOADER_TIME = 2000;
 
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
   const isMobile = useIsMobile();
   const [carteLoaded, setCarteLoaded] = useState(false);
+  const [grilleLoaded, setGrilleLoaded] = useState(false);
   const [carteDisplayH, setCarteDisplayH] = useState(0);
   const [carteDisplayW, setCarteDisplayW] = useState(0);
   const scrollRef = useHorizontalScroll();
@@ -41,12 +43,18 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
     setCarteDisplayW(carte.fond.width * factor);
   }, [carte]);
 
-  // fake loading time
-  const handleLoadingComplete = useCallback(() => {
+  const handleCarteLoaded = useCallback(() => {
     // give at least 1s of loader to avoid unpleasant blink
     setTimeout(() => {
       setCarteLoaded(true);
-    }, 1000);
+    }, MIN_LOADER_TIME);
+  }, []);
+
+  const handleGrilleLoaded = useCallback(() => {
+    // give at least 1s of loader to avoid unpleasant blink
+    setTimeout(() => {
+      setGrilleLoaded(true);
+    }, MIN_LOADER_TIME);
   }, []);
 
   // scroll to the center of the carte.fond on mount
@@ -136,7 +144,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         ref={scrollRef}
       >
         <AnimatePresence>
-          {!carteLoaded && (
+          {!carteLoaded && !grilleLoaded && (
             <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
@@ -166,17 +174,30 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
           />
         </svg>
         <div className="relative md:absolute">
-          <Image
-            src={carte.fond.url}
-            alt="fond de carte"
-            quality={100}
-            unoptimized
-            layout="fixed"
-            onLoadingComplete={handleLoadingComplete}
-            width={carteDisplayW}
-            height={carteDisplayH}
-            className="aboslute top-0 left-0"
-          />
+          <div className="absolute top-0 left-0">
+            <Image
+              src={carte.fond.url}
+              alt="fond de carte"
+              quality={100}
+              unoptimized
+              layout="fixed"
+              onLoadingComplete={handleCarteLoaded}
+              width={carteDisplayW}
+              height={carteDisplayH}
+            />
+          </div>
+          <div className="absolute top-0 left-0">
+            <Image
+              src={carte.grille.url}
+              alt="fond de carte"
+              quality={100}
+              unoptimized
+              layout="fixed"
+              onLoadingComplete={handleGrilleLoaded}
+              width={carteDisplayW}
+              height={carteDisplayH}
+            />
+          </div>
           {renderEtapes()}
         </div>
       </div>
