@@ -38,9 +38,14 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   const gradient = useGradient(carte);
 
   useEffect(() => {
-    const factor = window.innerHeight / carte.fond.height;
-    setCarteDisplayH(window.innerHeight);
-    setCarteDisplayW(carte.fond.width * factor);
+    const handleResize = () => {
+      const factor = window.innerHeight / carte.fond.height;
+      setCarteDisplayH(window.innerHeight);
+      setCarteDisplayW(carte.fond.width * factor);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, [carte]);
 
   const handleCarteLoaded = useCallback(() => {
