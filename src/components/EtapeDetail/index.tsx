@@ -57,7 +57,7 @@ const EtapeDetail = ({
                     />
                   </div>
                 )}
-                {etape.images.length && (
+                {etape.images.length > 0 && (
                   <div className="mt-4">
                     <Carousel
                       images={etape.images.map((i) => i.responsiveImage)}
@@ -76,7 +76,7 @@ const EtapeDetail = ({
                   className="text-xl md:text-3xl font-plex mb-12"
                   dangerouslySetInnerHTML={{ __html: etape.description }}
                 />
-                {etape.liens.length && (
+                {etape.liens.length > 0 && (
                   <ul>
                     {etape.liens.map((lien, i) => {
                       return (
