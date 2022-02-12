@@ -186,7 +186,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
               height={carteDisplayH}
             />
           </div>
-          <div className="absolute top-0 left-0">
+          <div className={`absolute top-0 left-0 ${isMobile && 'hidden'}`}>
             <Image
               src={carte.grille.url}
               alt="fond de carte"
