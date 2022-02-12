@@ -38,7 +38,7 @@ const EtapeDetail = ({
             X
           </button>
           <h2 className="text-3xl md:text-5xl font-ouroboros mb-4 trunctate">
-            {etape.nom?.toUpperCase()}
+            {etape.nom.toUpperCase()}
           </h2>
           <span className="text-xl md:text-3xl font-plex mb-6 md:mb-16">
             {etape.lieu} ~ {dateRangeCopy}
@@ -49,7 +49,7 @@ const EtapeDetail = ({
                 {etape.video && (
                   <div className="relative" style={{ paddingTop: '56.25%' }}>
                     <ReactPlayer
-                      url={etape.video.url!}
+                      url={etape.video.url}
                       controls
                       width="100%"
                       height="100%"
@@ -57,10 +57,10 @@ const EtapeDetail = ({
                     />
                   </div>
                 )}
-                {etape.images && (
+                {etape.images.length && (
                   <div className="mt-4">
                     <Carousel
-                      images={etape.images.map((i) => i.responsiveImage!)}
+                      images={etape.images.map((i) => i.responsiveImage)}
                       arrowColor={color}
                     />
                   </div>
@@ -74,19 +74,21 @@ const EtapeDetail = ({
                 )}
                 <p
                   className="text-xl md:text-3xl font-plex mb-12"
-                  dangerouslySetInnerHTML={{ __html: etape.description! }}
+                  dangerouslySetInnerHTML={{ __html: etape.description }}
                 />
-                <ul>
-                  {etape.liens.map((lien, i) => {
-                    return (
-                      <li key={i} className="font-plex mb-2 mix-blend-difference text-white">
-                        <a href={lien.url!} target="_blank" rel="noopener noreferrer">
-                          {lien.titre?.length ? lien.titre : lien.url}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {etape.liens.length && (
+                  <ul>
+                    {etape.liens.map((lien, i) => {
+                      return (
+                        <li key={i} className="font-plex mb-2 mix-blend-difference text-white">
+                          <a href={lien.url} target="_blank" rel="noopener noreferrer">
+                            {lien.titre.length ? lien.titre : lien.url}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </div>
             </div>
           </SimpleBar>

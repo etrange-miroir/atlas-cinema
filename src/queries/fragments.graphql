@@ -20,3 +20,13 @@ fragment Image on FileField {
     base64
   }
 }
+
+fragment CarteAsset on FileField {
+  url
+  width
+  height
+}
+
+fragment HexColor on ColorField {
+  hex
+}

@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import chroma from 'chroma-js';
 import { AnimatePresence, motion } from 'framer-motion';
 import BounceLoader from 'react-spinners/BounceLoader';
 
 import { CarteRecord, EtapeRecord } from '~/generated/sdk';
+import { useGradient } from '~/utils/useGradient';
 import { useHorizontalScroll } from '~/utils/useHorizontalScroll';
 import { useIsMobile } from '~/utils/useIsMobile';
 
@@ -20,8 +22,9 @@ const DELTA_YEARS = END_YEAR - START_YEAR + 1;
 
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
   const isMobile = useIsMobile();
-  const carteRef = useRef<HTMLImageElement>(null);
   const [carteLoaded, setCarteLoaded] = useState(false);
+  const [carteDisplayH, setCarteDisplayH] = useState(0);
+  const [carteDisplayW, setCarteDisplayW] = useState(0);
   const scrollRef = useHorizontalScroll();
   const [ratio, setRatio] = useState<CarteRatio>();
   const [scrollPct, setScrollPct] = useState((new Date().getFullYear() - START_YEAR) / DELTA_YEARS);
@@ -30,53 +33,40 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
     `${START_YEAR + Math.floor(scrollPct * DELTA_YEARS)}`
   );
   const [selectedEtape, setSelectedEtape] = useState<EtapeRecord>();
-  // convenient memo to keep the gradient array computed
-  const gradient = useMemo(() => {
-    if (
-      carte.gradient0 &&
-      carte.gradient25 &&
-      carte.gradient50 &&
-      carte.gradient75 &&
-      carte.gradient100
-    ) {
-      return [
-        carte.gradient0.hex!,
-        carte.gradient25.hex!,
-        carte.gradient50.hex!,
-        carte.gradient75.hex!,
-        carte.gradient100.hex!,
-      ];
-    }
-  }, [carte.gradient0, carte.gradient100, carte.gradient25, carte.gradient50, carte.gradient75]);
+  const gradient = useGradient(carte);
+
+  useEffect(() => {
+    const factor = window.innerHeight / carte.fond.height;
+    setCarteDisplayH(window.innerHeight);
+    setCarteDisplayW(carte.fond.width * factor);
+  }, [carte]);
 
   // fake loading time
-  useEffect(() => {
-    const to = setTimeout(() => {
+  const handleLoadingComplete = useCallback(() => {
+    // give at least 1s of loader to avoid unpleasant blink
+    setTimeout(() => {
       setCarteLoaded(true);
-    }, 5000);
-    return () => clearTimeout(to);
+    }, 1000);
   }, []);
 
   // scroll to the center of the carte.fond on mount
   useEffect(() => {
-    if (carteRef.current && scrollRef.current) {
+    if (scrollRef.current) {
       scrollRef.current.scrollTo({
-        left:
-          carteRef.current.getBoundingClientRect().width * scrollPct - window.innerWidth / 2 + 1,
+        left: carteDisplayW * scrollPct - window.innerWidth / 2 + 1,
       });
     }
     // the missing dep is intended
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carteRef, scrollRef]);
+  }, [carteDisplayW, scrollRef]);
 
   // keep track of scroll pct
   useEffect(() => {
-    if (carteRef.current !== null && scrollRef.current) {
+    if (scrollRef.current) {
       const scrollDiv = scrollRef.current;
-      const carteWidth = carteRef.current.getBoundingClientRect().width;
       const handleScroll = (e: Event) => {
         const target = e.target as HTMLDivElement;
-        const pct = (target.scrollLeft + target.clientWidth / 2) / carteWidth;
+        const pct = (target.scrollLeft + target.clientWidth / 2) / carteDisplayW;
         setScrollPct(pct);
       };
       scrollDiv.addEventListener('scroll', handleScroll);
@@ -84,7 +74,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         scrollDiv.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [carteRef, gradient, scrollRef]);
+  }, [carteDisplayW, gradient, scrollRef]);
 
   // use scroll pct to change color of the barre
   useEffect(() => {
@@ -110,20 +100,20 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   // once the carte.fond is rendered, compute the display ratio
   // that will then serve to place etape at the right spot
   useEffect(() => {
-    if (carteRef.current && carte.fond) {
+    if (carte.fond) {
       setRatio({
-        ratioX: carteRef.current.getBoundingClientRect().width / carte.fond.width,
-        ratioY: carteRef.current.getBoundingClientRect().height / carte.fond.height,
+        ratioX: carteDisplayW / carte.fond.width,
+        ratioY: carteDisplayH / carte.fond.height,
       });
     }
-  }, [carte.fond, carteRef]);
+  }, [carte.fond, carteDisplayH, carteDisplayW]);
 
   // only render etapes once ratio, gradient and carte.fond are here
   const renderEtapes = useCallback(() => {
-    if (ratio && gradient && carte.fond && carteLoaded) {
+    if (ratio && gradient && carte.fond) {
       return etapes.map((etape, index) => {
         const color = chroma
-          .scale(gradient)(etape.coordonnees[0].coordX / carte.fond!.width)
+          .scale(gradient)(etape.coordonnees[0].coordX / carte.fond.width)
           .hex();
         return (
           <Etape
@@ -136,7 +126,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
         );
       });
     }
-  }, [carte.fond, carteLoaded, etapes, gradient, ratio]);
+  }, [carte.fond, etapes, gradient, ratio]);
 
   if (!carte.fond) return null;
   return (
@@ -176,12 +166,16 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
           />
         </svg>
         <div className="relative md:absolute">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={carte.fond?.url}
+          <Image
+            src={carte.fond.url}
             alt="fond de carte"
-            className="h-screen max-w-none"
-            ref={carteRef}
+            quality={100}
+            unoptimized
+            layout="fixed"
+            onLoadingComplete={handleLoadingComplete}
+            width={carteDisplayW}
+            height={carteDisplayH}
+            className="aboslute top-0 left-0"
           />
           {renderEtapes()}
         </div>

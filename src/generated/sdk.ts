@@ -1,8 +1,8 @@
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+export type Maybe<T> = T;
+export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -14,17 +14,17 @@ export type Scalars = {
   Int: number;
   Float: number;
   /** Represents `true` or `false` values. */
-  BooleanType: any;
+  BooleanType: boolean;
   CustomData: any;
   /** A ISO 8601 compliant date value */
-  Date: any;
+  Date: string;
   /** A ISO 8601 compliant datetime value */
-  DateTime: any;
+  DateTime: string;
   /** Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). */
   FloatType: any;
   /** Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. */
-  IntType: any;
-  ItemId: any;
+  IntType: number;
+  ItemId: string;
   MetaTagAttributes: any;
   UploadId: any;
 };
@@ -32,38 +32,39 @@ export type Scalars = {
 /** Specifies how to filter Boolean fields */
 export type BooleanFilter = {
   /** Search for records with an exact match */
-  eq?: InputMaybe<Scalars['BooleanType']>;
+  eq: InputMaybe<Scalars['BooleanType']>;
 };
 
 /** Record of type Carte (carte) */
 export type CarteRecord = {
   __typename?: 'CarteRecord';
   _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
   /** SEO meta tags */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
-  fond?: Maybe<FileField>;
-  gradient0?: Maybe<ColorField>;
-  gradient25?: Maybe<ColorField>;
-  gradient50?: Maybe<ColorField>;
-  gradient75?: Maybe<ColorField>;
-  gradient100?: Maybe<ColorField>;
-  grille?: Maybe<FileField>;
+  decor: Maybe<FileField>;
+  fond: Maybe<FileField>;
+  gradient0: Maybe<ColorField>;
+  gradient25: Maybe<ColorField>;
+  gradient50: Maybe<ColorField>;
+  gradient75: Maybe<ColorField>;
+  gradient100: Maybe<ColorField>;
+  grille: Maybe<FileField>;
   id: Scalars['ItemId'];
   updatedAt: Scalars['DateTime'];
 };
 
 /** Record of type Carte (carte) */
 export type CarteRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export type CollectionMetadata = {
@@ -88,29 +89,29 @@ export enum ColorBucketType {
 
 export type ColorField = {
   __typename?: 'ColorField';
-  alpha?: Maybe<Scalars['IntType']>;
-  blue?: Maybe<Scalars['IntType']>;
-  green?: Maybe<Scalars['IntType']>;
-  hex?: Maybe<Scalars['String']>;
-  red?: Maybe<Scalars['IntType']>;
+  alpha: Maybe<Scalars['IntType']>;
+  blue: Maybe<Scalars['IntType']>;
+  green: Maybe<Scalars['IntType']>;
+  hex: Maybe<Scalars['String']>;
+  red: Maybe<Scalars['IntType']>;
 };
 
 /** Record of type Coordonnée (coordonnee) */
 export type CoordonneeRecord = {
   __typename?: 'CoordonneeRecord';
   _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
   /** SEO meta tags */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  coordX?: Maybe<Scalars['IntType']>;
-  coordY?: Maybe<Scalars['IntType']>;
+  coordX: Maybe<Scalars['IntType']>;
+  coordY: Maybe<Scalars['IntType']>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   updatedAt: Scalars['DateTime'];
@@ -118,67 +119,68 @@ export type CoordonneeRecord = {
 
 /** Record of type Coordonnée (coordonnee) */
 export type CoordonneeRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by creation datetime */
 export type CreatedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  eq?: InputMaybe<Scalars['DateTime']>;
+  eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gt?: InputMaybe<Scalars['DateTime']>;
+  gt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gte?: InputMaybe<Scalars['DateTime']>;
+  gte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lt?: InputMaybe<Scalars['DateTime']>;
+  lt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lte?: InputMaybe<Scalars['DateTime']>;
+  lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  neq?: InputMaybe<Scalars['DateTime']>;
+  neq: InputMaybe<Scalars['DateTime']>;
 };
 
 /** Specifies how to filter Date fields */
 export type DateFilter = {
   /** Search for records with an exact match */
-  eq?: InputMaybe<Scalars['Date']>;
+  eq: InputMaybe<Scalars['Date']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with a value that's strictly greater than the one specified */
-  gt?: InputMaybe<Scalars['Date']>;
+  gt: InputMaybe<Scalars['Date']>;
   /** Filter records with a value that's greater than or equal to the one specified */
-  gte?: InputMaybe<Scalars['Date']>;
+  gte: InputMaybe<Scalars['Date']>;
   /** Filter records with a value that's less than the one specified */
-  lt?: InputMaybe<Scalars['Date']>;
+  lt: InputMaybe<Scalars['Date']>;
   /** Filter records with a value that's less or equal than the one specified */
-  lte?: InputMaybe<Scalars['Date']>;
+  lte: InputMaybe<Scalars['Date']>;
   /** Exclude records with an exact match */
-  neq?: InputMaybe<Scalars['Date']>;
+  neq: InputMaybe<Scalars['Date']>;
 };
 
 export type EtapeModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<EtapeModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  createdAt?: InputMaybe<CreatedAtFilter>;
-  dateDeDebut?: InputMaybe<DateFilter>;
-  dateDeFin?: InputMaybe<DateFilter>;
-  description?: InputMaybe<TextFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  images?: InputMaybe<GalleryFilter>;
-  lieu?: InputMaybe<StringFilter>;
-  nom?: InputMaybe<StringFilter>;
-  off?: InputMaybe<BooleanFilter>;
-  sousTitre?: InputMaybe<StringFilter>;
-  updatedAt?: InputMaybe<UpdatedAtFilter>;
-  video?: InputMaybe<VideoFilter>;
+  OR: InputMaybe<Array<InputMaybe<EtapeModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _locales: InputMaybe<LocalesFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  createdAt: InputMaybe<CreatedAtFilter>;
+  dateDeDebut: InputMaybe<DateFilter>;
+  dateDeFin: InputMaybe<DateFilter>;
+  description: InputMaybe<TextFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  images: InputMaybe<GalleryFilter>;
+  lieu: InputMaybe<StringFilter>;
+  nom: InputMaybe<StringFilter>;
+  off: InputMaybe<BooleanFilter>;
+  sousTitre: InputMaybe<StringFilter>;
+  updatedAt: InputMaybe<UpdatedAtFilter>;
+  video: InputMaybe<VideoFilter>;
 };
 
 export enum EtapeModelOrderBy {
@@ -221,60 +223,63 @@ export enum EtapeModelOrderBy {
 /** Record of type Étape (etape) */
 export type EtapeRecord = {
   __typename?: 'EtapeRecord';
-  _allDescriptionLocales?: Maybe<Array<Maybe<StringMultiLocaleField>>>;
-  _allNomLocales?: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _allDescriptionLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _allNomLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
   _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
+  _locales: Array<SiteLocale>;
   _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
   /** SEO meta tags */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   coordonnees: Array<CoordonneeRecord>;
   createdAt: Scalars['DateTime'];
-  dateDeDebut?: Maybe<Scalars['Date']>;
-  dateDeFin?: Maybe<Scalars['Date']>;
-  description?: Maybe<Scalars['String']>;
+  dateDeDebut: Maybe<Scalars['Date']>;
+  dateDeFin: Maybe<Scalars['Date']>;
+  description: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   images: Array<FileField>;
   liens: Array<LienRecord>;
-  lieu?: Maybe<Scalars['String']>;
-  nom?: Maybe<Scalars['String']>;
-  off?: Maybe<Scalars['BooleanType']>;
-  sousTitre?: Maybe<Scalars['String']>;
+  lieu: Maybe<Scalars['String']>;
+  nom: Maybe<Scalars['String']>;
+  off: Maybe<Scalars['BooleanType']>;
+  sousTitre: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-  video?: Maybe<VideoField>;
+  video: Maybe<VideoField>;
 };
 
 /** Record of type Étape (etape) */
 export type EtapeRecord_AllDescriptionLocalesArgs = {
-  locale?: InputMaybe<SiteLocale>;
-  markdown?: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Record of type Étape (etape) */
 export type EtapeRecord_AllNomLocalesArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** Record of type Étape (etape) */
 export type EtapeRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** Record of type Étape (etape) */
 export type EtapeRecordDescriptionArgs = {
-  locale?: InputMaybe<SiteLocale>;
-  markdown?: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Record of type Étape (etape) */
 export type EtapeRecordNomArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export enum FaviconType {
@@ -287,86 +292,92 @@ export type FileField = {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
-  alt?: Maybe<Scalars['String']>;
-  author?: Maybe<Scalars['String']>;
+  alt: Maybe<Scalars['String']>;
+  author: Maybe<Scalars['String']>;
   basename: Scalars['String'];
-  blurUpThumb?: Maybe<Scalars['String']>;
-  blurhash?: Maybe<Scalars['String']>;
+  blurUpThumb: Maybe<Scalars['String']>;
+  blurhash: Maybe<Scalars['String']>;
   colors: Array<Maybe<ColorField>>;
-  copyright?: Maybe<Scalars['String']>;
-  customData?: Maybe<Scalars['CustomData']>;
-  exifInfo?: Maybe<Scalars['CustomData']>;
+  copyright: Maybe<Scalars['String']>;
+  customData: Maybe<Scalars['CustomData']>;
+  exifInfo: Maybe<Scalars['CustomData']>;
   filename: Scalars['String'];
-  focalPoint?: Maybe<FocalPoint>;
+  focalPoint: Maybe<FocalPoint>;
   format: Scalars['String'];
-  height?: Maybe<Scalars['IntType']>;
+  height: Maybe<Scalars['IntType']>;
   id: Scalars['UploadId'];
   md5: Scalars['String'];
   mimeType: Scalars['String'];
-  notes?: Maybe<Scalars['String']>;
-  responsiveImage?: Maybe<ResponsiveImage>;
+  notes: Maybe<Scalars['String']>;
+  responsiveImage: Maybe<ResponsiveImage>;
   size: Scalars['IntType'];
   smartTags: Array<Maybe<Scalars['String']>>;
   tags: Array<Maybe<Scalars['String']>>;
-  title?: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
   url: Scalars['String'];
-  video?: Maybe<UploadVideoField>;
-  width?: Maybe<Scalars['IntType']>;
+  video: Maybe<UploadVideoField>;
+  width: Maybe<Scalars['IntType']>;
 };
 
 export type FileFieldAltArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export type FileFieldBlurUpThumbArgs = {
-  imgixParams?: InputMaybe<ImgixParams>;
+  imgixParams: InputMaybe<ImgixParams>;
   punch?: InputMaybe<Scalars['Float']>;
   quality?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
 };
 
 export type FileFieldCustomDataArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export type FileFieldFocalPointArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export type FileFieldResponsiveImageArgs = {
-  imgixParams?: InputMaybe<ImgixParams>;
-  sizes?: InputMaybe<Scalars['String']>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  imgixParams: InputMaybe<ImgixParams>;
+  locale: InputMaybe<SiteLocale>;
+  sizes: InputMaybe<Scalars['String']>;
 };
 
 export type FileFieldTitleArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export type FileFieldUrlArgs = {
-  imgixParams?: InputMaybe<ImgixParams>;
+  imgixParams: InputMaybe<ImgixParams>;
 };
 
 /** Specifies how to filter Multiple files/images field */
 export type GalleryFilter = {
   /** Filter records that have all of the specified uploads. The specified values must be Upload IDs */
-  allIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  allIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
   /** Filter records that have one of the specified uploads. The specified values must be Upload IDs */
-  anyIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  anyIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
   /** Search for records with an exact match. The specified values must be Upload IDs */
-  eq?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  eq: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records that do not have any of the specified uploads. The specified values must be Upload IDs */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
 };
 
 export type GlobalSeoField = {
   __typename?: 'GlobalSeoField';
-  facebookPageUrl?: Maybe<Scalars['String']>;
-  fallbackSeo?: Maybe<SeoField>;
-  siteName?: Maybe<Scalars['String']>;
-  titleSuffix?: Maybe<Scalars['String']>;
-  twitterAccount?: Maybe<Scalars['String']>;
+  facebookPageUrl: Maybe<Scalars['String']>;
+  fallbackSeo: Maybe<SeoField>;
+  siteName: Maybe<Scalars['String']>;
+  titleSuffix: Maybe<Scalars['String']>;
+  twitterAccount: Maybe<Scalars['String']>;
 };
 
 export type ImgixParams = {
@@ -379,7 +390,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/ar)
    */
-  ar?: InputMaybe<Scalars['String']>;
+  ar: InputMaybe<Scalars['String']>;
   /**
    * Automatic
    *
@@ -387,7 +398,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/auto)
    */
-  auto?: InputMaybe<Array<ImgixParamsAuto>>;
+  auto: InputMaybe<Array<ImgixParamsAuto>>;
   /**
    * Background Color
    *
@@ -395,7 +406,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/bg)
    */
-  bg?: InputMaybe<Scalars['String']>;
+  bg: InputMaybe<Scalars['String']>;
   /**
    * Blend
    *
@@ -403,7 +414,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend)
    */
-  blend?: InputMaybe<Scalars['String']>;
+  blend: InputMaybe<Scalars['String']>;
   /**
    * Blend Align
    *
@@ -413,7 +424,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-align)
    */
-  blendAlign?: InputMaybe<Array<ImgixParamsBlendAlign>>;
+  blendAlign: InputMaybe<Array<ImgixParamsBlendAlign>>;
   /**
    * Blend Alpha
    *
@@ -423,7 +434,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-alpha)
    */
-  blendAlpha?: InputMaybe<Scalars['IntType']>;
+  blendAlpha: InputMaybe<Scalars['IntType']>;
   /**
    * Blend Color
    *
@@ -431,7 +442,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-color)
    */
-  blendColor?: InputMaybe<Scalars['String']>;
+  blendColor: InputMaybe<Scalars['String']>;
   /**
    * Blend Crop
    *
@@ -441,7 +452,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-crop)
    */
-  blendCrop?: InputMaybe<Array<ImgixParamsBlendCrop>>;
+  blendCrop: InputMaybe<Array<ImgixParamsBlendCrop>>;
   /**
    * Blend Fit
    *
@@ -451,7 +462,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-fit)
    */
-  blendFit?: InputMaybe<ImgixParamsBlendFit>;
+  blendFit: InputMaybe<ImgixParamsBlendFit>;
   /**
    * Blend Height
    *
@@ -461,7 +472,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-h)
    */
-  blendH?: InputMaybe<Scalars['FloatType']>;
+  blendH: InputMaybe<Scalars['FloatType']>;
   /**
    * Blend Mode
    *
@@ -471,7 +482,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-mode)
    */
-  blendMode?: InputMaybe<ImgixParamsBlendMode>;
+  blendMode: InputMaybe<ImgixParamsBlendMode>;
   /**
    * Blend Padding
    *
@@ -481,7 +492,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-pad)
    */
-  blendPad?: InputMaybe<Scalars['IntType']>;
+  blendPad: InputMaybe<Scalars['IntType']>;
   /**
    * Blend Size
    *
@@ -491,7 +502,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-size)
    */
-  blendSize?: InputMaybe<ImgixParamsBlendSize>;
+  blendSize: InputMaybe<ImgixParamsBlendSize>;
   /**
    * Blend Width
    *
@@ -501,7 +512,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-w)
    */
-  blendW?: InputMaybe<Scalars['FloatType']>;
+  blendW: InputMaybe<Scalars['FloatType']>;
   /**
    * Blend X Position
    *
@@ -511,7 +522,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-x)
    */
-  blendX?: InputMaybe<Scalars['IntType']>;
+  blendX: InputMaybe<Scalars['IntType']>;
   /**
    * Blend Y Position
    *
@@ -521,7 +532,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/blending/blend-y)
    */
-  blendY?: InputMaybe<Scalars['IntType']>;
+  blendY: InputMaybe<Scalars['IntType']>;
   /**
    * Gaussian Blur
    *
@@ -529,7 +540,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/blur)
    */
-  blur?: InputMaybe<Scalars['IntType']>;
+  blur: InputMaybe<Scalars['IntType']>;
   /**
    * Border Size & Color
    *
@@ -537,7 +548,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border)
    */
-  border?: InputMaybe<Scalars['String']>;
+  border: InputMaybe<Scalars['String']>;
   /**
    * Border Bottom
    *
@@ -547,7 +558,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-bottom)
    */
-  borderBottom?: InputMaybe<Scalars['IntType']>;
+  borderBottom: InputMaybe<Scalars['IntType']>;
   /**
    * Border Left
    *
@@ -557,7 +568,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-left)
    */
-  borderLeft?: InputMaybe<Scalars['IntType']>;
+  borderLeft: InputMaybe<Scalars['IntType']>;
   /**
    * Outer Border Radius
    *
@@ -567,7 +578,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-radius)
    */
-  borderRadius?: InputMaybe<Scalars['String']>;
+  borderRadius: InputMaybe<Scalars['String']>;
   /**
    * Inner Border Radius
    *
@@ -577,7 +588,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-radius-inner)
    */
-  borderRadiusInner?: InputMaybe<Scalars['String']>;
+  borderRadiusInner: InputMaybe<Scalars['String']>;
   /**
    * Border Right
    *
@@ -587,7 +598,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-right)
    */
-  borderRight?: InputMaybe<Scalars['IntType']>;
+  borderRight: InputMaybe<Scalars['IntType']>;
   /**
    * Border Top
    *
@@ -597,7 +608,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/border-top)
    */
-  borderTop?: InputMaybe<Scalars['IntType']>;
+  borderTop: InputMaybe<Scalars['IntType']>;
   /**
    * Brightness
    *
@@ -605,7 +616,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/bri)
    */
-  bri?: InputMaybe<Scalars['IntType']>;
+  bri: InputMaybe<Scalars['IntType']>;
   /**
    * Client Hints
    *
@@ -613,7 +624,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/ch)
    */
-  ch?: InputMaybe<Array<ImgixParamsCh>>;
+  ch: InputMaybe<Array<ImgixParamsCh>>;
   /**
    * Chroma Subsampling
    *
@@ -621,7 +632,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/chromasub)
    */
-  chromasub?: InputMaybe<Scalars['IntType']>;
+  chromasub: InputMaybe<Scalars['IntType']>;
   /**
    * Color Quantization
    *
@@ -629,7 +640,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/colorquant)
    */
-  colorquant?: InputMaybe<Scalars['IntType']>;
+  colorquant: InputMaybe<Scalars['IntType']>;
   /**
    * Palette Color Count
    *
@@ -639,7 +650,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/color-palette/colors)
    */
-  colors?: InputMaybe<Scalars['IntType']>;
+  colors: InputMaybe<Scalars['IntType']>;
   /**
    * Contrast
    *
@@ -647,7 +658,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/con)
    */
-  con?: InputMaybe<Scalars['IntType']>;
+  con: InputMaybe<Scalars['IntType']>;
   /**
    * Mask Corner Radius
    *
@@ -657,7 +668,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/mask/corner-radius)
    */
-  cornerRadius?: InputMaybe<Scalars['String']>;
+  cornerRadius: InputMaybe<Scalars['String']>;
   /**
    * Crop Mode
    *
@@ -667,7 +678,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/crop)
    */
-  crop?: InputMaybe<Array<ImgixParamsCrop>>;
+  crop: InputMaybe<Array<ImgixParamsCrop>>;
   /**
    * Color Space
    *
@@ -675,7 +686,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/cs)
    */
-  cs?: InputMaybe<ImgixParamsCs>;
+  cs: InputMaybe<ImgixParamsCs>;
   /**
    * Download
    *
@@ -683,7 +694,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/dl)
    */
-  dl?: InputMaybe<Scalars['String']>;
+  dl: InputMaybe<Scalars['String']>;
   /**
    * Dots Per Inch
    *
@@ -691,7 +702,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/dpi)
    */
-  dpi?: InputMaybe<Scalars['IntType']>;
+  dpi: InputMaybe<Scalars['IntType']>;
   /**
    * Device Pixel Ratio
    *
@@ -699,7 +710,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/dpr)
    */
-  dpr?: InputMaybe<Scalars['FloatType']>;
+  dpr: InputMaybe<Scalars['FloatType']>;
   /**
    * Duotone
    *
@@ -707,7 +718,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/duotone)
    */
-  duotone?: InputMaybe<Scalars['String']>;
+  duotone: InputMaybe<Scalars['String']>;
   /**
    * Duotone Alpha
    *
@@ -717,7 +728,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/duotone-alpha)
    */
-  duotoneAlpha?: InputMaybe<Scalars['IntType']>;
+  duotoneAlpha: InputMaybe<Scalars['IntType']>;
   /**
    * Exposure
    *
@@ -725,7 +736,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/exp)
    */
-  exp?: InputMaybe<Scalars['IntType']>;
+  exp: InputMaybe<Scalars['IntType']>;
   /**
    * Url Expiration Timestamp
    *
@@ -733,7 +744,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/expires)
    */
-  expires?: InputMaybe<Scalars['IntType']>;
+  expires: InputMaybe<Scalars['IntType']>;
   /**
    * Face Index
    *
@@ -743,7 +754,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/face-detection/faceindex)
    */
-  faceindex?: InputMaybe<Scalars['IntType']>;
+  faceindex: InputMaybe<Scalars['IntType']>;
   /**
    * Face Padding
    *
@@ -753,7 +764,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/face-detection/facepad)
    */
-  facepad?: InputMaybe<Scalars['FloatType']>;
+  facepad: InputMaybe<Scalars['FloatType']>;
   /**
    * Json Face Data
    *
@@ -763,7 +774,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/face-detection/faces)
    */
-  faces?: InputMaybe<Scalars['IntType']>;
+  faces: InputMaybe<Scalars['IntType']>;
   /**
    * Fill Mode
    *
@@ -773,7 +784,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/fill/fill)
    */
-  fill?: InputMaybe<ImgixParamsFill>;
+  fill: InputMaybe<ImgixParamsFill>;
   /**
    * Fill Color
    *
@@ -783,7 +794,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/fill/fill-color)
    */
-  fillColor?: InputMaybe<Scalars['String']>;
+  fillColor: InputMaybe<Scalars['String']>;
   /**
    * Resize Fit Mode
    *
@@ -791,7 +802,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/fit)
    */
-  fit?: InputMaybe<ImgixParamsFit>;
+  fit: InputMaybe<ImgixParamsFit>;
   /**
    * Flip Axis
    *
@@ -799,7 +810,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/rotation/flip)
    */
-  flip?: InputMaybe<ImgixParamsFlip>;
+  flip: InputMaybe<ImgixParamsFlip>;
   /**
    * Output Format
    *
@@ -807,7 +818,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/fm)
    */
-  fm?: InputMaybe<ImgixParamsFm>;
+  fm: InputMaybe<ImgixParamsFm>;
   /**
    * Focal Point Debug
    *
@@ -817,7 +828,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-debug)
    */
-  fpDebug?: InputMaybe<Scalars['BooleanType']>;
+  fpDebug: InputMaybe<Scalars['BooleanType']>;
   /**
    * Focal Point X Position
    *
@@ -827,7 +838,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-x)
    */
-  fpX?: InputMaybe<Scalars['FloatType']>;
+  fpX: InputMaybe<Scalars['FloatType']>;
   /**
    * Focal Point Y Position
    *
@@ -837,7 +848,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-y)
    */
-  fpY?: InputMaybe<Scalars['FloatType']>;
+  fpY: InputMaybe<Scalars['FloatType']>;
   /**
    * Focal Point Zoom
    *
@@ -847,7 +858,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-z)
    */
-  fpZ?: InputMaybe<Scalars['FloatType']>;
+  fpZ: InputMaybe<Scalars['FloatType']>;
   /**
    * Gamma
    *
@@ -855,7 +866,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/gam)
    */
-  gam?: InputMaybe<Scalars['IntType']>;
+  gam: InputMaybe<Scalars['IntType']>;
   /**
    * Grid Colors
    *
@@ -863,7 +874,7 @@ export type ImgixParams = {
    *
    * Depends on: `transparency`
    */
-  gridColors?: InputMaybe<Scalars['String']>;
+  gridColors: InputMaybe<Scalars['String']>;
   /**
    * Grid Size
    *
@@ -871,7 +882,7 @@ export type ImgixParams = {
    *
    * Depends on: `transparency`
    */
-  gridSize?: InputMaybe<Scalars['IntType']>;
+  gridSize: InputMaybe<Scalars['IntType']>;
   /**
    * Image Height
    *
@@ -879,7 +890,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/h)
    */
-  h?: InputMaybe<Scalars['FloatType']>;
+  h: InputMaybe<Scalars['FloatType']>;
   /**
    * Highlight
    *
@@ -887,7 +898,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/high)
    */
-  high?: InputMaybe<Scalars['IntType']>;
+  high: InputMaybe<Scalars['IntType']>;
   /**
    * Halftone
    *
@@ -895,7 +906,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/htn)
    */
-  htn?: InputMaybe<Scalars['IntType']>;
+  htn: InputMaybe<Scalars['IntType']>;
   /**
    * Hue Shift
    *
@@ -903,7 +914,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/hue)
    */
-  hue?: InputMaybe<Scalars['IntType']>;
+  hue: InputMaybe<Scalars['IntType']>;
   /**
    * Invert
    *
@@ -911,13 +922,13 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/invert)
    */
-  invert?: InputMaybe<Scalars['BooleanType']>;
+  invert: InputMaybe<Scalars['BooleanType']>;
   /**
    * Iptc Passthrough
    *
    * Determine if IPTC data should be passed for JPEG images.
    */
-  iptc?: InputMaybe<ImgixParamsIptc>;
+  iptc: InputMaybe<ImgixParamsIptc>;
   /**
    * Lossless Compression
    *
@@ -927,7 +938,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/lossless)
    */
-  lossless?: InputMaybe<Scalars['BooleanType']>;
+  lossless: InputMaybe<Scalars['BooleanType']>;
   /**
    * Watermark Image Url
    *
@@ -935,7 +946,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark)
    */
-  mark?: InputMaybe<Scalars['String']>;
+  mark: InputMaybe<Scalars['String']>;
   /**
    * Watermark Alignment Mode
    *
@@ -945,7 +956,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-align)
    */
-  markAlign?: InputMaybe<Array<ImgixParamsMarkAlign>>;
+  markAlign: InputMaybe<Array<ImgixParamsMarkAlign>>;
   /**
    * Watermark Alpha
    *
@@ -955,7 +966,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-alpha)
    */
-  markAlpha?: InputMaybe<Scalars['IntType']>;
+  markAlpha: InputMaybe<Scalars['IntType']>;
   /**
    * Watermark Base Url
    *
@@ -965,7 +976,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-base)
    */
-  markBase?: InputMaybe<Scalars['String']>;
+  markBase: InputMaybe<Scalars['String']>;
   /**
    * Watermark Fit Mode
    *
@@ -975,7 +986,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-fit)
    */
-  markFit?: InputMaybe<ImgixParamsMarkFit>;
+  markFit: InputMaybe<ImgixParamsMarkFit>;
   /**
    * Watermark Height
    *
@@ -985,7 +996,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-h)
    */
-  markH?: InputMaybe<Scalars['FloatType']>;
+  markH: InputMaybe<Scalars['FloatType']>;
   /**
    * Watermark Padding
    *
@@ -995,7 +1006,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-pad)
    */
-  markPad?: InputMaybe<Scalars['IntType']>;
+  markPad: InputMaybe<Scalars['IntType']>;
   /**
    * Watermark Rotation
    *
@@ -1003,7 +1014,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-rot)
    */
-  markRot?: InputMaybe<Scalars['FloatType']>;
+  markRot: InputMaybe<Scalars['FloatType']>;
   /**
    * Watermark Scale
    *
@@ -1013,7 +1024,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-scale)
    */
-  markScale?: InputMaybe<Scalars['IntType']>;
+  markScale: InputMaybe<Scalars['IntType']>;
   /**
    * Watermark Tile
    *
@@ -1023,7 +1034,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-tile)
    */
-  markTile?: InputMaybe<ImgixParamsMarkTile>;
+  markTile: InputMaybe<ImgixParamsMarkTile>;
   /**
    * Watermark Width
    *
@@ -1033,7 +1044,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-w)
    */
-  markW?: InputMaybe<Scalars['FloatType']>;
+  markW: InputMaybe<Scalars['FloatType']>;
   /**
    * Watermark X Position
    *
@@ -1043,7 +1054,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-x)
    */
-  markX?: InputMaybe<Scalars['IntType']>;
+  markX: InputMaybe<Scalars['IntType']>;
   /**
    * Watermark Y Position
    *
@@ -1053,7 +1064,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/watermark/mark-y)
    */
-  markY?: InputMaybe<Scalars['IntType']>;
+  markY: InputMaybe<Scalars['IntType']>;
   /**
    * Mask Type
    *
@@ -1061,7 +1072,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/mask)
    */
-  mask?: InputMaybe<Scalars['String']>;
+  mask: InputMaybe<Scalars['String']>;
   /**
    * Mask Background Color
    *
@@ -1071,7 +1082,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/mask/mask-bg)
    */
-  maskBg?: InputMaybe<Scalars['String']>;
+  maskBg: InputMaybe<Scalars['String']>;
   /**
    * Maximum Height
    *
@@ -1081,7 +1092,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/max-height)
    */
-  maxH?: InputMaybe<Scalars['IntType']>;
+  maxH: InputMaybe<Scalars['IntType']>;
   /**
    * Maximum Width
    *
@@ -1091,7 +1102,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/max-width)
    */
-  maxW?: InputMaybe<Scalars['IntType']>;
+  maxW: InputMaybe<Scalars['IntType']>;
   /**
    * Minimum Height
    *
@@ -1101,7 +1112,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/min-height)
    */
-  minH?: InputMaybe<Scalars['IntType']>;
+  minH: InputMaybe<Scalars['IntType']>;
   /**
    * Minimum Width
    *
@@ -1111,7 +1122,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/min-width)
    */
-  minW?: InputMaybe<Scalars['IntType']>;
+  minW: InputMaybe<Scalars['IntType']>;
   /**
    * Monochrome
    *
@@ -1119,7 +1130,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/monochrome)
    */
-  monochrome?: InputMaybe<Scalars['String']>;
+  monochrome: InputMaybe<Scalars['String']>;
   /**
    * Noise Reduction Bound
    *
@@ -1127,7 +1138,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/noise-reduction/nr)
    */
-  nr?: InputMaybe<Scalars['IntType']>;
+  nr: InputMaybe<Scalars['IntType']>;
   /**
    * Noise Reduction Sharpen
    *
@@ -1135,7 +1146,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/noise-reduction/nrs)
    */
-  nrs?: InputMaybe<Scalars['IntType']>;
+  nrs: InputMaybe<Scalars['IntType']>;
   /**
    * Orientation
    *
@@ -1143,7 +1154,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/rotation/orient)
    */
-  orient?: InputMaybe<Scalars['IntType']>;
+  orient: InputMaybe<Scalars['IntType']>;
   /**
    * Padding
    *
@@ -1151,7 +1162,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad)
    */
-  pad?: InputMaybe<Scalars['IntType']>;
+  pad: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Bottom
    *
@@ -1159,7 +1170,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-bottom)
    */
-  padBottom?: InputMaybe<Scalars['IntType']>;
+  padBottom: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Left
    *
@@ -1167,7 +1178,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-left)
    */
-  padLeft?: InputMaybe<Scalars['IntType']>;
+  padLeft: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Right
    *
@@ -1175,7 +1186,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-right)
    */
-  padRight?: InputMaybe<Scalars['IntType']>;
+  padRight: InputMaybe<Scalars['IntType']>;
   /**
    * Padding Top
    *
@@ -1183,7 +1194,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/border-and-padding/pad-top)
    */
-  padTop?: InputMaybe<Scalars['IntType']>;
+  padTop: InputMaybe<Scalars['IntType']>;
   /**
    * Pdf Page Number
    *
@@ -1191,7 +1202,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/pdf/page)
    */
-  page?: InputMaybe<Scalars['IntType']>;
+  page: InputMaybe<Scalars['IntType']>;
   /**
    * Color Palette Extraction
    *
@@ -1199,7 +1210,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/color-palette/palette)
    */
-  palette?: InputMaybe<ImgixParamsPalette>;
+  palette: InputMaybe<ImgixParamsPalette>;
   /**
    * Pdf Annotation
    *
@@ -1207,7 +1218,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/pdf/pdf-annotation)
    */
-  pdfAnnotation?: InputMaybe<Scalars['BooleanType']>;
+  pdfAnnotation: InputMaybe<Scalars['BooleanType']>;
   /**
    * Css Prefix
    *
@@ -1217,7 +1228,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/color-palette/prefix)
    */
-  prefix?: InputMaybe<Scalars['String']>;
+  prefix: InputMaybe<Scalars['String']>;
   /**
    * Pixellate
    *
@@ -1225,7 +1236,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/px)
    */
-  px?: InputMaybe<Scalars['IntType']>;
+  px: InputMaybe<Scalars['IntType']>;
   /**
    * Output Quality
    *
@@ -1235,7 +1246,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/format/q)
    */
-  q?: InputMaybe<Scalars['IntType']>;
+  q: InputMaybe<Scalars['IntType']>;
   /**
    * Source Rectangle Region
    *
@@ -1243,7 +1254,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/rect)
    */
-  rect?: InputMaybe<Scalars['String']>;
+  rect: InputMaybe<Scalars['String']>;
   /**
    * Rotation
    *
@@ -1251,7 +1262,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/rotation/rot)
    */
-  rot?: InputMaybe<Scalars['FloatType']>;
+  rot: InputMaybe<Scalars['FloatType']>;
   /**
    * Saturation
    *
@@ -1259,7 +1270,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sat)
    */
-  sat?: InputMaybe<Scalars['IntType']>;
+  sat: InputMaybe<Scalars['IntType']>;
   /**
    * Sepia Tone
    *
@@ -1267,7 +1278,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/stylize/sepia)
    */
-  sepia?: InputMaybe<Scalars['IntType']>;
+  sepia: InputMaybe<Scalars['IntType']>;
   /**
    * Shadow
    *
@@ -1275,7 +1286,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/shad)
    */
-  shad?: InputMaybe<Scalars['FloatType']>;
+  shad: InputMaybe<Scalars['FloatType']>;
   /**
    * Sharpen
    *
@@ -1283,7 +1294,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sharp)
    */
-  sharp?: InputMaybe<Scalars['FloatType']>;
+  sharp: InputMaybe<Scalars['FloatType']>;
   /**
    * Transparency
    *
@@ -1291,7 +1302,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/fill/transparency)
    */
-  transparency?: InputMaybe<ImgixParamsTransparency>;
+  transparency: InputMaybe<ImgixParamsTransparency>;
   /**
    * Trim Image
    *
@@ -1299,7 +1310,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim)
    */
-  trim?: InputMaybe<ImgixParamsTrim>;
+  trim: InputMaybe<ImgixParamsTrim>;
   /**
    * Trim Color
    *
@@ -1309,7 +1320,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim-color)
    */
-  trimColor?: InputMaybe<Scalars['String']>;
+  trimColor: InputMaybe<Scalars['String']>;
   /**
    * Trim Mean Difference
    *
@@ -1319,7 +1330,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim-md)
    */
-  trimMd?: InputMaybe<Scalars['FloatType']>;
+  trimMd: InputMaybe<Scalars['FloatType']>;
   /**
    * Trim Padding
    *
@@ -1329,7 +1340,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim-pad)
    */
-  trimPad?: InputMaybe<Scalars['IntType']>;
+  trimPad: InputMaybe<Scalars['IntType']>;
   /**
    * Trim Standard Deviation
    *
@@ -1339,7 +1350,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim-sd)
    */
-  trimSd?: InputMaybe<Scalars['FloatType']>;
+  trimSd: InputMaybe<Scalars['FloatType']>;
   /**
    * Trim Tolerance
    *
@@ -1349,7 +1360,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/trim/trim-tol)
    */
-  trimTol?: InputMaybe<Scalars['FloatType']>;
+  trimTol: InputMaybe<Scalars['FloatType']>;
   /**
    * Text String
    *
@@ -1357,7 +1368,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt)
    */
-  txt?: InputMaybe<Scalars['String']>;
+  txt: InputMaybe<Scalars['String']>;
   /**
    * Text Align
    *
@@ -1367,7 +1378,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-align)
    */
-  txtAlign?: InputMaybe<Array<ImgixParamsTxtAlign>>;
+  txtAlign: InputMaybe<Array<ImgixParamsTxtAlign>>;
   /**
    * Text Clipping Mode
    *
@@ -1377,7 +1388,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-clip)
    */
-  txtClip?: InputMaybe<Array<ImgixParamsTxtClip>>;
+  txtClip: InputMaybe<Array<ImgixParamsTxtClip>>;
   /**
    * Text Color
    *
@@ -1387,7 +1398,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-color)
    */
-  txtColor?: InputMaybe<Scalars['String']>;
+  txtColor: InputMaybe<Scalars['String']>;
   /**
    * Text Fit Mode
    *
@@ -1397,7 +1408,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-fit)
    */
-  txtFit?: InputMaybe<ImgixParamsTxtFit>;
+  txtFit: InputMaybe<ImgixParamsTxtFit>;
   /**
    * Text Font
    *
@@ -1407,7 +1418,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-font)
    */
-  txtFont?: InputMaybe<Scalars['String']>;
+  txtFont: InputMaybe<Scalars['String']>;
   /**
    * Text Leading
    *
@@ -1417,7 +1428,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/typesetting/txt-lead)
    */
-  txtLead?: InputMaybe<Scalars['IntType']>;
+  txtLead: InputMaybe<Scalars['IntType']>;
   /**
    * Text Ligatures
    *
@@ -1427,7 +1438,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-lig)
    */
-  txtLig?: InputMaybe<Scalars['IntType']>;
+  txtLig: InputMaybe<Scalars['IntType']>;
   /**
    * Text Outline
    *
@@ -1437,7 +1448,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-line)
    */
-  txtLine?: InputMaybe<Scalars['IntType']>;
+  txtLine: InputMaybe<Scalars['IntType']>;
   /**
    * Text Outline Color
    *
@@ -1447,7 +1458,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-line-color)
    */
-  txtLineColor?: InputMaybe<Scalars['String']>;
+  txtLineColor: InputMaybe<Scalars['String']>;
   /**
    * Text Padding
    *
@@ -1457,7 +1468,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-pad)
    */
-  txtPad?: InputMaybe<Scalars['IntType']>;
+  txtPad: InputMaybe<Scalars['IntType']>;
   /**
    * Text Shadow
    *
@@ -1467,7 +1478,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-shad)
    */
-  txtShad?: InputMaybe<Scalars['FloatType']>;
+  txtShad: InputMaybe<Scalars['FloatType']>;
   /**
    * Text Font Size
    *
@@ -1477,7 +1488,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-size)
    */
-  txtSize?: InputMaybe<Scalars['IntType']>;
+  txtSize: InputMaybe<Scalars['IntType']>;
   /**
    * Text Tracking
    *
@@ -1487,7 +1498,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/typesetting/txt-track)
    */
-  txtTrack?: InputMaybe<Scalars['IntType']>;
+  txtTrack: InputMaybe<Scalars['IntType']>;
   /**
    * Text Width
    *
@@ -1497,7 +1508,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-width)
    */
-  txtWidth?: InputMaybe<Scalars['IntType']>;
+  txtWidth: InputMaybe<Scalars['IntType']>;
   /**
    * Unsharp Mask
    *
@@ -1505,7 +1516,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/usm)
    */
-  usm?: InputMaybe<Scalars['IntType']>;
+  usm: InputMaybe<Scalars['IntType']>;
   /**
    * Unsharp Mask Radius
    *
@@ -1515,7 +1526,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/usmrad)
    */
-  usmrad?: InputMaybe<Scalars['FloatType']>;
+  usmrad: InputMaybe<Scalars['FloatType']>;
   /**
    * Vibrance
    *
@@ -1523,7 +1534,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/vib)
    */
-  vib?: InputMaybe<Scalars['IntType']>;
+  vib: InputMaybe<Scalars['IntType']>;
   /**
    * Image Width
    *
@@ -1531,7 +1542,7 @@ export type ImgixParams = {
    *
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/w)
    */
-  w?: InputMaybe<Scalars['FloatType']>;
+  w: InputMaybe<Scalars['FloatType']>;
 };
 
 export enum ImgixParamsAuto {
@@ -1716,19 +1727,19 @@ export enum ImgixParamsTxtFit {
 /** Specifies how to filter by usage */
 export type InUseFilter = {
   /** Search uploads that are currently used by some record or not */
-  eq?: InputMaybe<Scalars['BooleanType']>;
+  eq: InputMaybe<Scalars['BooleanType']>;
 };
 
 /** Specifies how to filter by ID */
 export type ItemIdFilter = {
   /** Search the record with the specified ID */
-  eq?: InputMaybe<Scalars['ItemId']>;
+  eq: InputMaybe<Scalars['ItemId']>;
   /** Search records with the specified IDs */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
   /** Exclude the record with the specified ID */
-  neq?: InputMaybe<Scalars['ItemId']>;
+  neq: InputMaybe<Scalars['ItemId']>;
   /** Search records that do not have the specified IDs */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
 };
 
 export enum ItemStatus {
@@ -1741,26 +1752,36 @@ export enum ItemStatus {
 export type LienRecord = {
   __typename?: 'LienRecord';
   _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
   /** SEO meta tags */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  titre?: Maybe<Scalars['String']>;
+  titre: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-  url?: Maybe<Scalars['String']>;
+  url: Maybe<Scalars['String']>;
 };
 
 /** Record of type Lien (lien) */
 export type LienRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+/** Specifies how to filter by locale */
+export type LocalesFilter = {
+  /** Filter records that are localized in all the specified locales */
+  allIn: InputMaybe<Array<SiteLocale>>;
+  /** Filter records that are localized in at least one of the specified locales */
+  anyIn: InputMaybe<Array<SiteLocale>>;
+  /** Filter records that are not localized in any of the specified locales */
+  notIn: InputMaybe<Array<SiteLocale>>;
 };
 
 export enum MuxThumbnailFormatType {
@@ -1772,27 +1793,27 @@ export enum MuxThumbnailFormatType {
 /** Specifies how to filter by image orientation */
 export type OrientationFilter = {
   /** Search uploads with the specified orientation */
-  eq?: InputMaybe<UploadOrientation>;
+  eq: InputMaybe<UploadOrientation>;
   /** Exclude uploads with the specified orientation */
-  neq?: InputMaybe<UploadOrientation>;
+  neq: InputMaybe<UploadOrientation>;
 };
 
 /** Specifies how to filter by publication datetime */
 export type PublishedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  eq?: InputMaybe<Scalars['DateTime']>;
+  eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gt?: InputMaybe<Scalars['DateTime']>;
+  gt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gte?: InputMaybe<Scalars['DateTime']>;
+  gte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lt?: InputMaybe<Scalars['DateTime']>;
+  lt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lte?: InputMaybe<Scalars['DateTime']>;
+  lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  neq?: InputMaybe<Scalars['DateTime']>;
+  neq: InputMaybe<Scalars['DateTime']>;
 };
 
 /** The query root for this schema */
@@ -1801,7 +1822,7 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allEtapesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
-  _allUploadsMeta?: Maybe<CollectionMetadata>;
+  _allUploadsMeta: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
@@ -1809,77 +1830,84 @@ export type Query = {
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
-  carte?: Maybe<CarteRecord>;
+  carte: Maybe<CarteRecord>;
   /** Returns a specific record */
-  etape?: Maybe<EtapeRecord>;
+  etape: Maybe<EtapeRecord>;
   /** Returns a specific asset */
-  upload?: Maybe<FileField>;
+  upload: Maybe<FileField>;
 };
 
 /** The query root for this schema */
 export type Query_AllEtapesMetaArgs = {
-  filter?: InputMaybe<EtapeModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<EtapeModelFilter>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** The query root for this schema */
 export type Query_AllUploadsMetaArgs = {
-  filter?: InputMaybe<UploadFilter>;
-  locale?: InputMaybe<SiteLocale>;
+  filter: InputMaybe<UploadFilter>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** The query root for this schema */
 export type Query_SiteArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** The query root for this schema */
 export type QueryAllEtapesArgs = {
-  filter?: InputMaybe<EtapeModelFilter>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<EtapeModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<EtapeModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
+  skip: InputMaybe<Scalars['IntType']>;
 };
 
 /** The query root for this schema */
 export type QueryAllUploadsArgs = {
-  filter?: InputMaybe<UploadFilter>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<UploadFilter>;
   first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
+  skip: InputMaybe<Scalars['IntType']>;
 };
 
 /** The query root for this schema */
 export type QueryCarteArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** The query root for this schema */
 export type QueryEtapeArgs = {
-  filter?: InputMaybe<EtapeModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<EtapeModelFilter>;
+  locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<EtapeModelOrderBy>>>;
 };
 
 /** The query root for this schema */
 export type QueryUploadArgs = {
-  filter?: InputMaybe<UploadFilter>;
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<UploadFilter>;
+  locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
 };
 
 /** Specifies how to filter by upload type */
 export type ResolutionFilter = {
   /** Search uploads with the specified resolution */
-  eq?: InputMaybe<ResolutionType>;
+  eq: InputMaybe<ResolutionType>;
   /** Search uploads with the specified resolutions */
-  in?: InputMaybe<Array<InputMaybe<ResolutionType>>>;
+  in: InputMaybe<Array<InputMaybe<ResolutionType>>>;
   /** Exclude uploads with the specified resolution */
-  neq?: InputMaybe<ResolutionType>;
+  neq: InputMaybe<ResolutionType>;
   /** Search uploads without the specified resolutions */
-  notIn?: InputMaybe<Array<InputMaybe<ResolutionType>>>;
+  notIn: InputMaybe<Array<InputMaybe<ResolutionType>>>;
 };
 
 export enum ResolutionType {
@@ -1891,32 +1919,32 @@ export enum ResolutionType {
 
 export type ResponsiveImage = {
   __typename?: 'ResponsiveImage';
-  alt?: Maybe<Scalars['String']>;
+  alt: Maybe<Scalars['String']>;
   aspectRatio: Scalars['FloatType'];
-  base64?: Maybe<Scalars['String']>;
-  bgColor?: Maybe<Scalars['String']>;
+  base64: Maybe<Scalars['String']>;
+  bgColor: Maybe<Scalars['String']>;
   height: Scalars['IntType'];
   sizes: Scalars['String'];
   src: Scalars['String'];
   srcSet: Scalars['String'];
-  title?: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
   webpSrcSet: Scalars['String'];
   width: Scalars['IntType'];
 };
 
 export type SeoField = {
   __typename?: 'SeoField';
-  description?: Maybe<Scalars['String']>;
-  image?: Maybe<FileField>;
-  title?: Maybe<Scalars['String']>;
-  twitterCard?: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  image: Maybe<FileField>;
+  title: Maybe<Scalars['String']>;
+  twitterCard: Maybe<Scalars['String']>;
 };
 
 export type Site = {
   __typename?: 'Site';
-  favicon?: Maybe<FileField>;
+  favicon: Maybe<FileField>;
   faviconMetaTags: Array<Tag>;
-  globalSeo?: Maybe<GlobalSeoField>;
+  globalSeo: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
 };
 
@@ -1925,7 +1953,8 @@ export type SiteFaviconMetaTagsArgs = {
 };
 
 export type SiteGlobalSeoArgs = {
-  locale?: InputMaybe<SiteLocale>;
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
 };
 
 export enum SiteLocale {
@@ -1936,283 +1965,283 @@ export enum SiteLocale {
 /** Specifies how to filter by status */
 export type StatusFilter = {
   /** Search the record with the specified status */
-  eq?: InputMaybe<ItemStatus>;
+  eq: InputMaybe<ItemStatus>;
   /** Search records with the specified statuses */
-  in?: InputMaybe<Array<InputMaybe<ItemStatus>>>;
+  in: InputMaybe<Array<InputMaybe<ItemStatus>>>;
   /** Exclude the record with the specified status */
-  neq?: InputMaybe<ItemStatus>;
+  neq: InputMaybe<ItemStatus>;
   /** Search records without the specified statuses */
-  notIn?: InputMaybe<Array<InputMaybe<ItemStatus>>>;
+  notIn: InputMaybe<Array<InputMaybe<ItemStatus>>>;
 };
 
 /** Specifies how to filter Single-line string fields */
 export type StringFilter = {
   /** Search for records with an exact match */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records that equal one of the specified values */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter records with the specified field set as blank (null or empty string) */
-  isBlank?: InputMaybe<Scalars['BooleanType']>;
+  isBlank: InputMaybe<Scalars['BooleanType']>;
   /** Filter records based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude records with an exact match */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Filter records that do not equal one of the specified values */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude records based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 export type StringMatchesFilter = {
-  caseSensitive?: InputMaybe<Scalars['BooleanType']>;
+  caseSensitive: InputMaybe<Scalars['BooleanType']>;
   pattern: Scalars['String'];
-  regexp?: InputMaybe<Scalars['BooleanType']>;
+  regexp: InputMaybe<Scalars['BooleanType']>;
 };
 
 export type StringMultiLocaleField = {
   __typename?: 'StringMultiLocaleField';
-  locale?: Maybe<SiteLocale>;
-  value?: Maybe<Scalars['String']>;
+  locale: Maybe<SiteLocale>;
+  value: Maybe<Scalars['String']>;
 };
 
 export type Tag = {
   __typename?: 'Tag';
-  attributes?: Maybe<Scalars['MetaTagAttributes']>;
-  content?: Maybe<Scalars['String']>;
+  attributes: Maybe<Scalars['MetaTagAttributes']>;
+  content: Maybe<Scalars['String']>;
   tag: Scalars['String'];
 };
 
 /** Specifies how to filter text fields */
 export type TextFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with the specified field set as blank (null or empty string) */
-  isBlank?: InputMaybe<Scalars['BooleanType']>;
+  isBlank: InputMaybe<Scalars['BooleanType']>;
   /** Filter records based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude records based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by upload type */
 export type TypeFilter = {
   /** Search uploads with the specified type */
-  eq?: InputMaybe<UploadType>;
+  eq: InputMaybe<UploadType>;
   /** Search uploads with the specified types */
-  in?: InputMaybe<Array<InputMaybe<UploadType>>>;
+  in: InputMaybe<Array<InputMaybe<UploadType>>>;
   /** Exclude uploads with the specified type */
-  neq?: InputMaybe<UploadType>;
+  neq: InputMaybe<UploadType>;
   /** Search uploads without the specified types */
-  notIn?: InputMaybe<Array<InputMaybe<UploadType>>>;
+  notIn: InputMaybe<Array<InputMaybe<UploadType>>>;
 };
 
 /** Specifies how to filter by update datetime */
 export type UpdatedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  eq?: InputMaybe<Scalars['DateTime']>;
+  eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gt?: InputMaybe<Scalars['DateTime']>;
+  gt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
-  gte?: InputMaybe<Scalars['DateTime']>;
+  gte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lt?: InputMaybe<Scalars['DateTime']>;
+  lt: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
-  lte?: InputMaybe<Scalars['DateTime']>;
+  lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
-  neq?: InputMaybe<Scalars['DateTime']>;
+  neq: InputMaybe<Scalars['DateTime']>;
 };
 
 /** Specifies how to filter by default alt */
 export type UploadAltFilter = {
   /** Search the uploads with the specified alt */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Filter uploads with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Search uploads with the specified values as default alt */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude the uploads with the specified alt */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Search uploads that do not have the specified values as default alt */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by auhtor */
 export type UploadAuthorFilter = {
   /** Filter uploads with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by basename */
 export type UploadBasenameFilter = {
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by colors */
 export type UploadColorsFilter = {
   /** Filter uploads that have all of the specified colors */
-  allIn?: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
+  allIn: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
   /** Filter uploads that have at least one of the specified colors */
-  anyIn?: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
+  anyIn: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
   /** Filter uploads that have the specified colors */
-  contains?: InputMaybe<ColorBucketType>;
+  contains: InputMaybe<ColorBucketType>;
   /** Search for uploads with an exact match */
-  eq?: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
+  eq: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
   /** Filter uploads that do not have any of the specified colors */
-  notIn?: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
+  notIn: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
 };
 
 /** Specifies how to filter by copyright */
 export type UploadCopyrightFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by creation datetime */
 export type UploadCreatedAtFilter = {
   /** Search for uploads with an exact match */
-  eq?: InputMaybe<Scalars['DateTime']>;
+  eq: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's strictly greater than the one specified */
-  gt?: InputMaybe<Scalars['DateTime']>;
+  gt: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's greater than or equal to the one specified */
-  gte?: InputMaybe<Scalars['DateTime']>;
+  gte: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's less than the one specified */
-  lt?: InputMaybe<Scalars['DateTime']>;
+  lt: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's less or equal than the one specified */
-  lte?: InputMaybe<Scalars['DateTime']>;
+  lte: InputMaybe<Scalars['DateTime']>;
   /** Exclude uploads with an exact match */
-  neq?: InputMaybe<Scalars['DateTime']>;
+  neq: InputMaybe<Scalars['DateTime']>;
 };
 
 /** Specifies how to filter by filename */
 export type UploadFilenameFilter = {
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 export type UploadFilter = {
-  OR?: InputMaybe<Array<InputMaybe<UploadFilter>>>;
-  _createdAt?: InputMaybe<UploadCreatedAtFilter>;
-  _updatedAt?: InputMaybe<UploadUpdatedAtFilter>;
-  alt?: InputMaybe<UploadAltFilter>;
-  author?: InputMaybe<UploadAuthorFilter>;
-  basename?: InputMaybe<UploadBasenameFilter>;
-  colors?: InputMaybe<UploadColorsFilter>;
-  copyright?: InputMaybe<UploadCopyrightFilter>;
-  filename?: InputMaybe<UploadFilenameFilter>;
-  format?: InputMaybe<UploadFormatFilter>;
-  height?: InputMaybe<UploadHeightFilter>;
-  id?: InputMaybe<UploadIdFilter>;
-  inUse?: InputMaybe<InUseFilter>;
-  md5?: InputMaybe<UploadMd5Filter>;
-  mimeType?: InputMaybe<UploadMimeTypeFilter>;
-  notes?: InputMaybe<UploadNotesFilter>;
-  orientation?: InputMaybe<OrientationFilter>;
-  resolution?: InputMaybe<ResolutionFilter>;
-  size?: InputMaybe<UploadSizeFilter>;
-  smartTags?: InputMaybe<UploadTagsFilter>;
-  tags?: InputMaybe<UploadTagsFilter>;
-  title?: InputMaybe<UploadTitleFilter>;
-  type?: InputMaybe<TypeFilter>;
-  width?: InputMaybe<UploadWidthFilter>;
+  OR: InputMaybe<Array<InputMaybe<UploadFilter>>>;
+  _createdAt: InputMaybe<UploadCreatedAtFilter>;
+  _updatedAt: InputMaybe<UploadUpdatedAtFilter>;
+  alt: InputMaybe<UploadAltFilter>;
+  author: InputMaybe<UploadAuthorFilter>;
+  basename: InputMaybe<UploadBasenameFilter>;
+  colors: InputMaybe<UploadColorsFilter>;
+  copyright: InputMaybe<UploadCopyrightFilter>;
+  filename: InputMaybe<UploadFilenameFilter>;
+  format: InputMaybe<UploadFormatFilter>;
+  height: InputMaybe<UploadHeightFilter>;
+  id: InputMaybe<UploadIdFilter>;
+  inUse: InputMaybe<InUseFilter>;
+  md5: InputMaybe<UploadMd5Filter>;
+  mimeType: InputMaybe<UploadMimeTypeFilter>;
+  notes: InputMaybe<UploadNotesFilter>;
+  orientation: InputMaybe<OrientationFilter>;
+  resolution: InputMaybe<ResolutionFilter>;
+  size: InputMaybe<UploadSizeFilter>;
+  smartTags: InputMaybe<UploadTagsFilter>;
+  tags: InputMaybe<UploadTagsFilter>;
+  title: InputMaybe<UploadTitleFilter>;
+  type: InputMaybe<TypeFilter>;
+  width: InputMaybe<UploadWidthFilter>;
 };
 
 /** Specifies how to filter by format */
 export type UploadFormatFilter = {
   /** Search the asset with the specified format */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified formats */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude the asset with the specified format */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified formats */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 /** Specifies how to filter by height */
 export type UploadHeightFilter = {
   /** Search assets with the specified height */
-  eq?: InputMaybe<Scalars['IntType']>;
+  eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified height */
-  gt?: InputMaybe<Scalars['IntType']>;
+  gt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified height */
-  gte?: InputMaybe<Scalars['IntType']>;
+  gte: InputMaybe<Scalars['IntType']>;
   /** Search all assets smaller than the specified height */
-  lt?: InputMaybe<Scalars['IntType']>;
+  lt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified height */
-  lte?: InputMaybe<Scalars['IntType']>;
+  lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified height */
-  neq?: InputMaybe<Scalars['IntType']>;
+  neq: InputMaybe<Scalars['IntType']>;
 };
 
 /** Specifies how to filter by ID */
 export type UploadIdFilter = {
   /** Search the asset with the specified ID */
-  eq?: InputMaybe<Scalars['UploadId']>;
+  eq: InputMaybe<Scalars['UploadId']>;
   /** Search assets with the specified IDs */
-  in?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
   /** Exclude the asset with the specified ID */
-  neq?: InputMaybe<Scalars['UploadId']>;
+  neq: InputMaybe<Scalars['UploadId']>;
   /** Search assets that do not have the specified IDs */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
 };
 
 /** Specifies how to filter by MD5 */
 export type UploadMd5Filter = {
   /** Search the asset with the specified MD5 */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified MD5s */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude the asset with the specified MD5 */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified MD5s */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 /** Specifies how to filter by mime type */
 export type UploadMimeTypeFilter = {
   /** Search the asset with the specified mime type */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified mime types */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude the asset with the specified mime type */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified mime types */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 /** Specifies how to filter by notes */
 export type UploadNotesFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 export enum UploadOrderBy {
@@ -2245,49 +2274,49 @@ export enum UploadOrientation {
 /** Specifies how to filter by size */
 export type UploadSizeFilter = {
   /** Search assets with the specified size (in bytes) */
-  eq?: InputMaybe<Scalars['IntType']>;
+  eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified size (in bytes) */
-  gt?: InputMaybe<Scalars['IntType']>;
+  gt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified size (in bytes) */
-  gte?: InputMaybe<Scalars['IntType']>;
+  gte: InputMaybe<Scalars['IntType']>;
   /** Search all assets smaller than the specified size (in bytes) */
-  lt?: InputMaybe<Scalars['IntType']>;
+  lt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified size (in bytes) */
-  lte?: InputMaybe<Scalars['IntType']>;
+  lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified size (in bytes) */
-  neq?: InputMaybe<Scalars['IntType']>;
+  neq: InputMaybe<Scalars['IntType']>;
 };
 
 /** Specifies how to filter by tags */
 export type UploadTagsFilter = {
   /** Filter uploads linked to all of the specified tags */
-  allIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  allIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads linked to at least one of the specified tags */
-  anyIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  anyIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads linked to the specified tag */
-  contains?: InputMaybe<Scalars['String']>;
+  contains: InputMaybe<Scalars['String']>;
   /** Search for uploads with an exact match */
-  eq?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  eq: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads not linked to any of the specified tags */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 /** Specifies how to filter by default title */
 export type UploadTitleFilter = {
   /** Search the asset with the specified title */
-  eq?: InputMaybe<Scalars['String']>;
+  eq: InputMaybe<Scalars['String']>;
   /** Filter assets with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
   /** Search assets with the specified as default title */
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter uploads based on a regular expression */
-  matches?: InputMaybe<StringMatchesFilter>;
+  matches: InputMaybe<StringMatchesFilter>;
   /** Exclude the asset with the specified title */
-  neq?: InputMaybe<Scalars['String']>;
+  neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified as default title */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
-  notMatches?: InputMaybe<StringMatchesFilter>;
+  notMatches: InputMaybe<StringMatchesFilter>;
 };
 
 export enum UploadType {
@@ -2304,24 +2333,24 @@ export enum UploadType {
 /** Specifies how to filter by update datetime */
 export type UploadUpdatedAtFilter = {
   /** Search for uploads with an exact match */
-  eq?: InputMaybe<Scalars['DateTime']>;
+  eq: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's strictly greater than the one specified */
-  gt?: InputMaybe<Scalars['DateTime']>;
+  gt: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's greater than or equal to the one specified */
-  gte?: InputMaybe<Scalars['DateTime']>;
+  gte: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's less than the one specified */
-  lt?: InputMaybe<Scalars['DateTime']>;
+  lt: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's less or equal than the one specified */
-  lte?: InputMaybe<Scalars['DateTime']>;
+  lte: InputMaybe<Scalars['DateTime']>;
   /** Exclude uploads with an exact match */
-  neq?: InputMaybe<Scalars['DateTime']>;
+  neq: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UploadVideoField = {
   __typename?: 'UploadVideoField';
   duration: Scalars['Int'];
   framerate: Scalars['Int'];
-  mp4Url?: Maybe<Scalars['String']>;
+  mp4Url: Maybe<Scalars['String']>;
   muxAssetId: Scalars['String'];
   muxPlaybackId: Scalars['String'];
   streamingUrl: Scalars['String'];
@@ -2329,8 +2358,8 @@ export type UploadVideoField = {
 };
 
 export type UploadVideoFieldMp4UrlArgs = {
-  exactRes?: InputMaybe<VideoMp4Res>;
-  res?: InputMaybe<VideoMp4Res>;
+  exactRes: InputMaybe<VideoMp4Res>;
+  res: InputMaybe<VideoMp4Res>;
 };
 
 export type UploadVideoFieldThumbnailUrlArgs = {
@@ -2340,34 +2369,34 @@ export type UploadVideoFieldThumbnailUrlArgs = {
 /** Specifies how to filter by width */
 export type UploadWidthFilter = {
   /** Search assets with the specified width */
-  eq?: InputMaybe<Scalars['IntType']>;
+  eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified width */
-  gt?: InputMaybe<Scalars['IntType']>;
+  gt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified width */
-  gte?: InputMaybe<Scalars['IntType']>;
+  gte: InputMaybe<Scalars['IntType']>;
   /** Search all assets smaller than the specified width */
-  lt?: InputMaybe<Scalars['IntType']>;
+  lt: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger or equal to the specified width */
-  lte?: InputMaybe<Scalars['IntType']>;
+  lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified width */
-  neq?: InputMaybe<Scalars['IntType']>;
+  neq: InputMaybe<Scalars['IntType']>;
 };
 
 export type VideoField = {
   __typename?: 'VideoField';
-  height?: Maybe<Scalars['IntType']>;
-  provider?: Maybe<Scalars['String']>;
-  providerUid?: Maybe<Scalars['String']>;
-  thumbnailUrl?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['IntType']>;
+  height: Maybe<Scalars['IntType']>;
+  provider: Maybe<Scalars['String']>;
+  providerUid: Maybe<Scalars['String']>;
+  thumbnailUrl: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  url: Maybe<Scalars['String']>;
+  width: Maybe<Scalars['IntType']>;
 };
 
 /** Specifies how to filter Video fields */
 export type VideoFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
+  exists: InputMaybe<Scalars['BooleanType']>;
 };
 
 export enum VideoMp4Res {
@@ -2378,136 +2407,91 @@ export enum VideoMp4Res {
 
 export type FocalPoint = {
   __typename?: 'focalPoint';
-  x?: Maybe<Scalars['FloatType']>;
-  y?: Maybe<Scalars['FloatType']>;
+  x: Maybe<Scalars['FloatType']>;
+  y: Maybe<Scalars['FloatType']>;
 };
 
 export type GetCarteQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCarteQuery = {
   __typename?: 'Query';
-  carte?:
-    | {
-        __typename?: 'CarteRecord';
-        fond?:
-          | {
-              __typename?: 'FileField';
-              url: string;
-              width?: any | null | undefined;
-              height?: any | null | undefined;
-            }
-          | null
-          | undefined;
-        grille?:
-          | {
-              __typename?: 'FileField';
-              url: string;
-              width?: any | null | undefined;
-              height?: any | null | undefined;
-            }
-          | null
-          | undefined;
-        gradient0?:
-          | { __typename?: 'ColorField'; hex?: string | null | undefined }
-          | null
-          | undefined;
-        gradient100?:
-          | { __typename?: 'ColorField'; hex?: string | null | undefined }
-          | null
-          | undefined;
-        gradient25?:
-          | { __typename?: 'ColorField'; hex?: string | null | undefined }
-          | null
-          | undefined;
-        gradient50?:
-          | { __typename?: 'ColorField'; hex?: string | null | undefined }
-          | null
-          | undefined;
-        gradient75?:
-          | { __typename?: 'ColorField'; hex?: string | null | undefined }
-          | null
-          | undefined;
-      }
-    | null
-    | undefined;
+  carte: {
+    __typename?: 'CarteRecord';
+    fond: { __typename?: 'FileField'; url: string; width: number; height: number };
+    grille: { __typename?: 'FileField'; url: string; width: number; height: number };
+    decor: { __typename?: 'FileField'; url: string; width: number; height: number };
+    gradient0: { __typename?: 'ColorField'; hex: string };
+    gradient100: { __typename?: 'ColorField'; hex: string };
+    gradient25: { __typename?: 'ColorField'; hex: string };
+    gradient50: { __typename?: 'ColorField'; hex: string };
+    gradient75: { __typename?: 'ColorField'; hex: string };
+  };
 };
 
 export type GetEtapesQueryVariables = Exact<{
-  locale?: InputMaybe<SiteLocale>;
+  locale: InputMaybe<SiteLocale>;
 }>;
 
 export type GetEtapesQuery = {
   __typename?: 'Query';
   etapes: Array<{
     __typename?: 'EtapeRecord';
-    dateDeDebut?: any | null | undefined;
-    dateDeFin?: any | null | undefined;
-    description?: string | null | undefined;
-    lieu?: string | null | undefined;
-    nom?: string | null | undefined;
-    sousTitre?: string | null | undefined;
-    off?: any | null | undefined;
-    coordonnees: Array<{
-      __typename?: 'CoordonneeRecord';
-      coordX?: any | null | undefined;
-      coordY?: any | null | undefined;
-    }>;
+    dateDeDebut: string;
+    dateDeFin: string;
+    description: string;
+    lieu: string;
+    nom: string;
+    sousTitre: string;
+    off: boolean;
+    coordonnees: Array<{ __typename?: 'CoordonneeRecord'; coordX: number; coordY: number }>;
     images: Array<{
       __typename?: 'FileField';
-      responsiveImage?:
-        | {
-            __typename?: 'ResponsiveImage';
-            srcSet: string;
-            webpSrcSet: string;
-            sizes: string;
-            src: string;
-            width: any;
-            height: any;
-            aspectRatio: any;
-            alt?: string | null | undefined;
-            title?: string | null | undefined;
-            bgColor?: string | null | undefined;
-            base64?: string | null | undefined;
-          }
-        | null
-        | undefined;
-    }>;
-    video?:
-      | {
-          __typename?: 'VideoField';
-          thumbnailUrl?: string | null | undefined;
-          url?: string | null | undefined;
-        }
-      | null
-      | undefined;
-    liens: Array<{
-      __typename?: 'LienRecord';
-      titre?: string | null | undefined;
-      url?: string | null | undefined;
-    }>;
-  }>;
-};
-
-export type ImageFragment = {
-  __typename?: 'FileField';
-  responsiveImage?:
-    | {
+      responsiveImage: {
         __typename?: 'ResponsiveImage';
         srcSet: string;
         webpSrcSet: string;
         sizes: string;
         src: string;
-        width: any;
-        height: any;
+        width: number;
+        height: number;
         aspectRatio: any;
-        alt?: string | null | undefined;
-        title?: string | null | undefined;
-        bgColor?: string | null | undefined;
-        base64?: string | null | undefined;
-      }
-    | null
-    | undefined;
+        alt: string;
+        title: string;
+        bgColor: string;
+        base64: string;
+      };
+    }>;
+    video: { __typename?: 'VideoField'; thumbnailUrl: string; url: string };
+    liens: Array<{ __typename?: 'LienRecord'; titre: string; url: string }>;
+  }>;
 };
+
+export type ImageFragment = {
+  __typename?: 'FileField';
+  responsiveImage: {
+    __typename?: 'ResponsiveImage';
+    srcSet: string;
+    webpSrcSet: string;
+    sizes: string;
+    src: string;
+    width: number;
+    height: number;
+    aspectRatio: any;
+    alt: string;
+    title: string;
+    bgColor: string;
+    base64: string;
+  };
+};
+
+export type CarteAssetFragment = {
+  __typename?: 'FileField';
+  url: string;
+  width: number;
+  height: number;
+};
+
+export type HexColorFragment = { __typename?: 'ColorField'; hex: string };
 
 export const ImageFragmentDoc = gql`
   fragment Image on FileField {
@@ -2526,36 +2510,49 @@ export const ImageFragmentDoc = gql`
     }
   }
 `;
+export const CarteAssetFragmentDoc = gql`
+  fragment CarteAsset on FileField {
+    url
+    width
+    height
+  }
+`;
+export const HexColorFragmentDoc = gql`
+  fragment HexColor on ColorField {
+    hex
+  }
+`;
 export const GetCarteDocument = gql`
   query getCarte {
     carte {
       fond {
-        url
-        width
-        height
+        ...CarteAsset
       }
       grille {
-        url
-        width
-        height
+        ...CarteAsset
+      }
+      decor {
+        ...CarteAsset
       }
       gradient0 {
-        hex
+        ...HexColor
       }
       gradient100 {
-        hex
+        ...HexColor
       }
       gradient25 {
-        hex
+        ...HexColor
       }
       gradient50 {
-        hex
+        ...HexColor
       }
       gradient75 {
-        hex
+        ...HexColor
       }
     }
   }
+  ${CarteAssetFragmentDoc}
+  ${HexColorFragmentDoc}
 `;
 export const GetEtapesDocument = gql`
   query getEtapes($locale: SiteLocale) {

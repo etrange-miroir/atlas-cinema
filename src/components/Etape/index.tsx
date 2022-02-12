@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { CoordonneeRecord, EtapeRecord } from '~/generated/sdk';
+import { EtapeRecord } from '~/generated/sdk';
 import { useIsMobile } from '~/utils/useIsMobile';
 
 import { CarteRatio } from '../Carte';
@@ -47,11 +47,11 @@ const Etape = ({
   }, [etape.off, isHovered, isMobile]);
 
   const shouldShowSubtitle = useMemo(() => {
-    return isHovered || isMobile;
-  }, [isHovered, isMobile]);
+    return etape.sousTitre.length && (isHovered || isMobile);
+  }, [etape.sousTitre.length, isHovered, isMobile]);
 
   useEffect(() => {
-    const { coordX, coordY } = (etape.coordonnees as CoordonneeRecord[])[0];
+    const { coordX, coordY } = etape.coordonnees[0];
     setTop(carteRatio.ratioY * coordY - MARKER_SIZE / 2);
     setLeft(carteRatio.ratioX * coordX - MARKER_SIZE / 2);
   }, [carteRatio, etape.coordonnees]);
@@ -88,7 +88,7 @@ const Etape = ({
                   color,
                 }}
               >
-                {etape.nom?.toUpperCase()}
+                {etape.nom.toUpperCase()}
               </span>
             </motion.div>
           </AnimatePresence>

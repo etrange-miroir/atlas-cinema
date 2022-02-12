@@ -1,29 +1,28 @@
 query getCarte {
   carte {
     fond {
-      url
-      width
-      height
+      ...CarteAsset
     }
     grille {
-      url
-      width
-      height
+      ...CarteAsset
+    }
+    decor {
+      ...CarteAsset
     }
     gradient0 {
-      hex
+      ...HexColor
     }
     gradient100 {
-      hex
+      ...HexColor
     }
     gradient25 {
-      hex
+      ...HexColor
     }
     gradient50 {
-      hex
+      ...HexColor
     }
     gradient75 {
-      hex
+      ...HexColor
     }
   }
 }

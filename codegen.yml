@@ -10,11 +10,18 @@ generates:
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - typescript-graphql-request
+      - 'typescript-graphql-request'
     config:
       namingConvention:
         enumValues: keep
-    
+      maybeValue: T
+      avoidOptionals: true
+      scalars:
+        IntType: number
+        ItemId: string
+        BooleanType: boolean
+        Date: string
+        DateTime: string
 hooks:
     afterAllFileWrite:
         - prettier --write
