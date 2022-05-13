@@ -33,3 +33,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.paragraph-desc p {
+  margin-bottom: 12px;
+}

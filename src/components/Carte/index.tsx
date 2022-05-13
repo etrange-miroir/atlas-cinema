@@ -21,6 +21,10 @@ const END_YEAR = 2028;
 const DELTA_YEARS = END_YEAR - START_YEAR + 1;
 const MIN_LOADER_TIME = 2000;
 
+const getcolor = (pct: number, gradient: string[]) => {
+  return chroma.scale(gradient)(pct).brighten(2).hex();
+};
+
 const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] }) => {
   const isMobile = useIsMobile();
   const [carteLoaded, setCarteLoaded] = useState(false);
@@ -91,7 +95,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
 
   // use scroll pct to change color of the barre
   useEffect(() => {
-    setScrollColor(chroma.scale(gradient)(scrollPct).hex());
+    setScrollColor(getcolor(scrollPct, gradient));
   }, [gradient, scrollPct]);
 
   // use scroll pct to change year
@@ -125,9 +129,7 @@ const Carte = ({ carte, etapes }: { carte: CarteRecord; etapes: EtapeRecord[] })
   const renderEtapes = useCallback(() => {
     if (ratio && gradient && carte.fond) {
       return etapes.map((etape, index) => {
-        const color = chroma
-          .scale(gradient)(etape.coordonnees[0].coordX / carte.fond.width)
-          .hex();
+        const color = getcolor(etape.coordonnees[0].coordX / carte.fond.width, gradient);
         return (
           <Etape
             key={index}

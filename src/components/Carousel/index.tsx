@@ -55,8 +55,8 @@ const Carousel: React.FC<{ images: ResponsiveImage[]; arrowColor?: string }> = (
           <motion.button
             className="slider-btn flex items-center justify-center ring-transparent outline-none"
             style={{ color: arrowColor }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={prev}
           >
             <span role="img" aria-label="image précédente">
@@ -66,8 +66,8 @@ const Carousel: React.FC<{ images: ResponsiveImage[]; arrowColor?: string }> = (
           <motion.button
             className="slider-btn flex items-center justify-center ring-transparent outline-none"
             style={{ color: arrowColor }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={next}
           >
             <span role="img" aria-label="image suivante">

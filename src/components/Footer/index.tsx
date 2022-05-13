@@ -53,6 +53,9 @@ const Footer = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute bottom-0 md:bottom-12 right-0 md:right-12 flex flex-col md:flex-row p-8 bg-black text-white"
+            style={{
+              boxShadow: `4px 2px 4px rgba(64, 64, 64, 0.1)`,
+            }}
           >
             <div className="flex flex-row mb-8 md:mb-0 mr-0 md:mr-8 shrink">
               <EtapeSVG className="w-20 fill-white mr-4" />

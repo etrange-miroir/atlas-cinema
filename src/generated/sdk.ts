@@ -29,6 +29,44 @@ export type Scalars = {
   UploadId: any;
 };
 
+/** Record of type À propos (about) */
+export type AboutRecord = {
+  __typename?: 'AboutRecord';
+  _allTextLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  text: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+/** Record of type À propos (about) */
+export type AboutRecord_AllTextLocalesArgs = {
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Record of type À propos (about) */
+export type AboutRecord_SeoMetaTagsArgs = {
+  locale: InputMaybe<SiteLocale>;
+};
+
+/** Record of type À propos (about) */
+export type AboutRecordTextArgs = {
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Specifies how to filter Boolean fields */
 export type BooleanFilter = {
   /** Search for records with an exact match */
@@ -1825,6 +1863,8 @@ export type Query = {
   _allUploadsMeta: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
+  /** Returns the single instance record */
+  about: Maybe<AboutRecord>;
   /** Returns a collection of records */
   allEtapes: Array<EtapeRecord>;
   /** Returns a collection of assets */
@@ -1852,6 +1892,12 @@ export type Query_AllUploadsMetaArgs = {
 
 /** The query root for this schema */
 export type Query_SiteArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+/** The query root for this schema */
+export type QueryAboutArgs = {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
 };
@@ -2411,6 +2457,15 @@ export type FocalPoint = {
   y: Maybe<Scalars['FloatType']>;
 };
 
+export type GetAboutQueryVariables = Exact<{
+  locale: InputMaybe<SiteLocale>;
+}>;
+
+export type GetAboutQuery = {
+  __typename?: 'Query';
+  about: { __typename?: 'AboutRecord'; text: string };
+};
+
 export type GetCarteQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCarteQuery = {
@@ -2522,6 +2577,13 @@ export const HexColorFragmentDoc = gql`
     hex
   }
 `;
+export const GetAboutDocument = gql`
+  query getAbout($locale: SiteLocale) {
+    about {
+      text(locale: $locale)
+    }
+  }
+`;
 export const GetCarteDocument = gql`
   query getCarte {
     carte {
@@ -2593,6 +2655,19 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    getAbout(
+      variables?: GetAboutQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetAboutQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetAboutQuery>(GetAboutDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getAbout'
+      );
+    },
     getCarte(
       variables?: GetCarteQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']

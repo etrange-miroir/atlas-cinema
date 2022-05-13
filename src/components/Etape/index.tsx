@@ -59,13 +59,15 @@ const Etape = ({
   return (
     <AnimatePresence>
       <motion.div
-        className="absolute cursor-pointer z-20"
+        className="absolute cursor-pointer z-20 w-96"
         style={{
           top,
           left,
         }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         onClick={onClick}
       >
         {etape.off ? (
@@ -76,7 +78,7 @@ const Etape = ({
         {shouldShowTitle && (
           <AnimatePresence>
             <motion.div
-              className="relative -translate-x-1/2 md:max-w-md mt-1 text-center"
+              className="relative transform -translate-x-1/2 mt-1 text-center"
               style={{ marginLeft: MARKER_SIZE / 2 }}
               variants={item}
               initial="hidden"
