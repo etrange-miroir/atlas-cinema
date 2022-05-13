@@ -87,7 +87,7 @@ const EtapeDetail = ({
                   <ul>
                     {etape.liens.map((lien, i) => {
                       return (
-                        <li key={i} className="font-plex mb-2 mix-blend-difference text-white">
+                        <li key={i} className="font-plex mb-2 invert" style={{ color }}>
                           <a href={lien.url} target="_blank" rel="noopener noreferrer">
                             {lien.titre.length ? lien.titre : lien.url}
                           </a>
