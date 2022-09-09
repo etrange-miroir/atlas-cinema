@@ -39,7 +39,7 @@ const Etape = ({
   const [top, setTop] = useState<number | undefined>(undefined);
   const [left, setLeft] = useState<number | undefined>(undefined);
   const [isHovered, setHovered] = useState(false);
-
+  const [markerSize, setMarkerSize] = useState(80);
   const shouldShowTitle = useMemo(() => {
     return !etape.off || isHovered || isMobile;
   }, [etape.off, isHovered, isMobile]);
@@ -48,8 +48,8 @@ const Etape = ({
     return etape.sousTitre.length && isHovered && !isMobile;
   }, [etape.sousTitre.length, isHovered, isMobile]);
 
-  const markerSize = useMemo(() => {
-    return isMobile ? 40 : 80;
+  useEffect(() => {
+    setMarkerSize(isMobile ? 40 : 80);
   }, [isMobile]);
 
   useEffect(() => {
@@ -73,9 +73,23 @@ const Etape = ({
         onClick={onClick}
       >
         {etape.off ? (
-          <MarqueurOff color={color} size={markerSize} hovered={isHovered} />
+          <>
+            <div className="md:hidden block">
+              <MarqueurOff color={color} size={60} hovered={isHovered} />
+            </div>
+            <div className="md:block hidden">
+              <MarqueurOff color={color} size={80} hovered={isHovered} />
+            </div>
+          </>
         ) : (
-          <MarqueurEtape color={color} size={markerSize} hovered={isHovered} />
+          <>
+            <div className="md:hidden block">
+              <MarqueurEtape color={color} size={60} hovered={isHovered} />
+            </div>
+            <div className="md:block hidden">
+              <MarqueurEtape color={color} size={80} hovered={isHovered} />
+            </div>
+          </>
         )}
         {shouldShowTitle && (
           <AnimatePresence>
