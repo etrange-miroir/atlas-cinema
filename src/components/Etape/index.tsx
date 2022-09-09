@@ -24,8 +24,6 @@ const item = {
   show: { opacity: 1 },
 };
 
-const MARKER_SIZE = 80;
-
 const Etape = ({
   etape,
   carteRatio,
@@ -47,14 +45,18 @@ const Etape = ({
   }, [etape.off, isHovered, isMobile]);
 
   const shouldShowSubtitle = useMemo(() => {
-    return etape.sousTitre.length && (isHovered || isMobile);
+    return etape.sousTitre.length && isHovered && !isMobile;
   }, [etape.sousTitre.length, isHovered, isMobile]);
+
+  const markerSize = useMemo(() => {
+    return isMobile ? 60 : 80;
+  }, [isMobile]);
 
   useEffect(() => {
     const { coordX, coordY } = etape.coordonnees[0];
-    setTop(carteRatio.ratioY * coordY - MARKER_SIZE / 2);
-    setLeft(carteRatio.ratioX * coordX - MARKER_SIZE / 2);
-  }, [carteRatio, etape.coordonnees]);
+    setTop(carteRatio.ratioY * coordY - markerSize / 2);
+    setLeft(carteRatio.ratioX * coordX - markerSize / 2);
+  }, [markerSize, carteRatio, etape.coordonnees]);
 
   return (
     <AnimatePresence>
@@ -71,15 +73,15 @@ const Etape = ({
         onClick={onClick}
       >
         {etape.off ? (
-          <MarqueurOff color={color} size={MARKER_SIZE} hovered={isHovered} />
+          <MarqueurOff color={color} size={markerSize} hovered={isHovered} />
         ) : (
-          <MarqueurEtape color={color} size={MARKER_SIZE} hovered={isHovered} />
+          <MarqueurEtape color={color} size={markerSize} hovered={isHovered} />
         )}
         {shouldShowTitle && (
           <AnimatePresence>
             <motion.div
               className="relative transform -translate-x-1/2 mt-1 text-center"
-              style={{ marginLeft: MARKER_SIZE / 2 }}
+              style={{ marginLeft: markerSize / 2 }}
               variants={item}
               initial="hidden"
               animate="show"
@@ -98,7 +100,7 @@ const Etape = ({
         {shouldShowSubtitle && (
           <motion.div
             className="mt-1 -translate-x-1/2 text-center w-52"
-            style={{ marginLeft: MARKER_SIZE / 2 }}
+            style={{ marginLeft: markerSize / 2 }}
             variants={container}
             initial="hidden"
             animate="show"

@@ -1,5 +1,5 @@
 query getAbout($locale: SiteLocale) {
   about {
-    text(locale: $locale)
+    text(markdown: true, locale: $locale)
   }
 }

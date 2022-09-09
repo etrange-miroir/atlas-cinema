@@ -30,9 +30,9 @@ export type Scalars = {
 };
 
 /** Record of type À propos (about) */
-export type AboutRecord = {
+export type AboutRecord = RecordInterface & {
   __typename?: 'AboutRecord';
-  _allTextLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _allTextLocales: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -74,7 +74,7 @@ export type BooleanFilter = {
 };
 
 /** Record of type Carte (carte) */
-export type CarteRecord = {
+export type CarteRecord = RecordInterface & {
   __typename?: 'CarteRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -127,15 +127,15 @@ export enum ColorBucketType {
 
 export type ColorField = {
   __typename?: 'ColorField';
-  alpha: Maybe<Scalars['IntType']>;
-  blue: Maybe<Scalars['IntType']>;
-  green: Maybe<Scalars['IntType']>;
-  hex: Maybe<Scalars['String']>;
-  red: Maybe<Scalars['IntType']>;
+  alpha: Scalars['IntType'];
+  blue: Scalars['IntType'];
+  green: Scalars['IntType'];
+  hex: Scalars['String'];
+  red: Scalars['IntType'];
 };
 
-/** Record of type Coordonnée (coordonnee) */
-export type CoordonneeRecord = {
+/** Block of type Coordonnée (coordonnee) */
+export type CoordonneeRecord = RecordInterface & {
   __typename?: 'CoordonneeRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -155,7 +155,7 @@ export type CoordonneeRecord = {
   updatedAt: Scalars['DateTime'];
 };
 
-/** Record of type Coordonnée (coordonnee) */
+/** Block of type Coordonnée (coordonnee) */
 export type CoordonneeRecord_SeoMetaTagsArgs = {
   locale: InputMaybe<SiteLocale>;
 };
@@ -259,10 +259,10 @@ export enum EtapeModelOrderBy {
 }
 
 /** Record of type Étape (etape) */
-export type EtapeRecord = {
+export type EtapeRecord = RecordInterface & {
   __typename?: 'EtapeRecord';
-  _allDescriptionLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
-  _allNomLocales: Maybe<Array<Maybe<StringMultiLocaleField>>>;
+  _allDescriptionLocales: Maybe<Array<StringMultiLocaleField>>;
+  _allNomLocales: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -326,7 +326,7 @@ export enum FaviconType {
   msApplication = 'msApplication',
 }
 
-export type FileField = {
+export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
@@ -335,10 +335,10 @@ export type FileField = {
   basename: Scalars['String'];
   blurUpThumb: Maybe<Scalars['String']>;
   blurhash: Maybe<Scalars['String']>;
-  colors: Array<Maybe<ColorField>>;
+  colors: Array<ColorField>;
   copyright: Maybe<Scalars['String']>;
-  customData: Maybe<Scalars['CustomData']>;
-  exifInfo: Maybe<Scalars['CustomData']>;
+  customData: Scalars['CustomData'];
+  exifInfo: Scalars['CustomData'];
   filename: Scalars['String'];
   focalPoint: Maybe<FocalPoint>;
   format: Scalars['String'];
@@ -349,8 +349,8 @@ export type FileField = {
   notes: Maybe<Scalars['String']>;
   responsiveImage: Maybe<ResponsiveImage>;
   size: Scalars['IntType'];
-  smartTags: Array<Maybe<Scalars['String']>>;
-  tags: Array<Maybe<Scalars['String']>>;
+  smartTags: Array<Scalars['String']>;
+  tags: Array<Scalars['String']>;
   title: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
@@ -392,6 +392,74 @@ export type FileFieldTitleArgs = {
 };
 
 export type FileFieldUrlArgs = {
+  imgixParams: InputMaybe<ImgixParams>;
+};
+
+export type FileFieldInterface = {
+  _createdAt: Scalars['DateTime'];
+  _updatedAt: Scalars['DateTime'];
+  alt: Maybe<Scalars['String']>;
+  author: Maybe<Scalars['String']>;
+  basename: Scalars['String'];
+  blurUpThumb: Maybe<Scalars['String']>;
+  blurhash: Maybe<Scalars['String']>;
+  colors: Array<ColorField>;
+  copyright: Maybe<Scalars['String']>;
+  customData: Scalars['CustomData'];
+  exifInfo: Scalars['CustomData'];
+  filename: Scalars['String'];
+  focalPoint: Maybe<FocalPoint>;
+  format: Scalars['String'];
+  height: Maybe<Scalars['IntType']>;
+  id: Scalars['UploadId'];
+  md5: Scalars['String'];
+  mimeType: Scalars['String'];
+  notes: Maybe<Scalars['String']>;
+  responsiveImage: Maybe<ResponsiveImage>;
+  size: Scalars['IntType'];
+  smartTags: Array<Scalars['String']>;
+  tags: Array<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  url: Scalars['String'];
+  video: Maybe<UploadVideoField>;
+  width: Maybe<Scalars['IntType']>;
+};
+
+export type FileFieldInterfaceAltArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+export type FileFieldInterfaceBlurUpThumbArgs = {
+  imgixParams: InputMaybe<ImgixParams>;
+  punch?: InputMaybe<Scalars['Float']>;
+  quality?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+export type FileFieldInterfaceCustomDataArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+export type FileFieldInterfaceFocalPointArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+export type FileFieldInterfaceResponsiveImageArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  imgixParams: InputMaybe<ImgixParams>;
+  locale: InputMaybe<SiteLocale>;
+  sizes: InputMaybe<Scalars['String']>;
+};
+
+export type FileFieldInterfaceTitleArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+export type FileFieldInterfaceUrlArgs = {
   imgixParams: InputMaybe<ImgixParams>;
 };
 
@@ -1548,6 +1616,26 @@ export type ImgixParams = {
    */
   txtWidth: InputMaybe<Scalars['IntType']>;
   /**
+   * Text X Position
+   *
+   * Sets the horizontal (x) position of the text in pixels relative to the left edge of the base image.
+   *
+   * Depends on: `txt`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-x)
+   */
+  txtX: InputMaybe<Scalars['IntType']>;
+  /**
+   * Text Y Position
+   *
+   * Sets the vertical (y) position of the text in pixels relative to the top edge of the base image.
+   *
+   * Depends on: `txt`
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/url/text/txt-y)
+   */
+  txtY: InputMaybe<Scalars['IntType']>;
+  /**
    * Unsharp Mask
    *
    * Sharpens the source image using an unsharp mask.
@@ -1786,8 +1874,8 @@ export enum ItemStatus {
   updated = 'updated',
 }
 
-/** Record of type Lien (lien) */
-export type LienRecord = {
+/** Block of type Lien (lien) */
+export type LienRecord = RecordInterface & {
   __typename?: 'LienRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -1807,7 +1895,7 @@ export type LienRecord = {
   url: Maybe<Scalars['String']>;
 };
 
-/** Record of type Lien (lien) */
+/** Block of type Lien (lien) */
 export type LienRecord_SeoMetaTagsArgs = {
   locale: InputMaybe<SiteLocale>;
 };
@@ -1942,6 +2030,25 @@ export type QueryUploadArgs = {
   filter: InputMaybe<UploadFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+export type RecordInterface = {
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+};
+
+export type RecordInterface_SeoMetaTagsArgs = {
+  locale: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by upload type */
@@ -2336,15 +2443,15 @@ export type UploadSizeFilter = {
 /** Specifies how to filter by tags */
 export type UploadTagsFilter = {
   /** Filter uploads linked to all of the specified tags */
-  allIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  allIn: InputMaybe<Array<Scalars['String']>>;
   /** Filter uploads linked to at least one of the specified tags */
-  anyIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  anyIn: InputMaybe<Array<Scalars['String']>>;
   /** Filter uploads linked to the specified tag */
   contains: InputMaybe<Scalars['String']>;
   /** Search for uploads with an exact match */
-  eq: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  eq: InputMaybe<Array<Scalars['String']>>;
   /** Filter uploads not linked to any of the specified tags */
-  notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notIn: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** Specifies how to filter by default title */
@@ -2394,8 +2501,8 @@ export type UploadUpdatedAtFilter = {
 
 export type UploadVideoField = {
   __typename?: 'UploadVideoField';
-  duration: Scalars['Int'];
-  framerate: Scalars['Int'];
+  duration: Maybe<Scalars['Int']>;
+  framerate: Maybe<Scalars['Int']>;
   mp4Url: Maybe<Scalars['String']>;
   muxAssetId: Scalars['String'];
   muxPlaybackId: Scalars['String'];
@@ -2430,13 +2537,13 @@ export type UploadWidthFilter = {
 
 export type VideoField = {
   __typename?: 'VideoField';
-  height: Maybe<Scalars['IntType']>;
-  provider: Maybe<Scalars['String']>;
-  providerUid: Maybe<Scalars['String']>;
-  thumbnailUrl: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  url: Maybe<Scalars['String']>;
-  width: Maybe<Scalars['IntType']>;
+  height: Scalars['IntType'];
+  provider: Scalars['String'];
+  providerUid: Scalars['String'];
+  thumbnailUrl: Scalars['String'];
+  title: Scalars['String'];
+  url: Scalars['String'];
+  width: Scalars['IntType'];
 };
 
 /** Specifies how to filter Video fields */
@@ -2453,8 +2560,8 @@ export enum VideoMp4Res {
 
 export type FocalPoint = {
   __typename?: 'focalPoint';
-  x: Maybe<Scalars['FloatType']>;
-  y: Maybe<Scalars['FloatType']>;
+  x: Scalars['FloatType'];
+  y: Scalars['FloatType'];
 };
 
 export type GetAboutQueryVariables = Exact<{
@@ -2580,7 +2687,7 @@ export const HexColorFragmentDoc = gql`
 export const GetAboutDocument = gql`
   query getAbout($locale: SiteLocale) {
     about {
-      text(locale: $locale)
+      text(markdown: true, locale: $locale)
     }
   }
 `;
