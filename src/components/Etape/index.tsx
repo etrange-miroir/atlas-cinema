@@ -49,7 +49,7 @@ const Etape = ({
   }, [etape.sousTitre.length, isHovered, isMobile]);
 
   const markerSize = useMemo(() => {
-    return isMobile ? 60 : 80;
+    return isMobile ? 40 : 80;
   }, [isMobile]);
 
   useEffect(() => {
