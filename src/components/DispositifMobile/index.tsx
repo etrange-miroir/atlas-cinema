@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { AnimatePresence, motion, useCycle } from 'framer-motion';
+import { Image, ResponsiveImageType } from 'react-datocms';
 import SimpleBar from 'simplebar-react';
 
 import { DispositifMobileRecord } from '~/generated/sdk';
@@ -41,17 +42,28 @@ const DispositifMobile = ({ dispositifMobile }: { dispositifMobile: DispositifMo
               X
             </motion.button>
             <SimpleBar className="w-full overflow-x-hidden flex">
-              <div className="flex flex-col items-center flex-1">
-                <h2 className="text-3xl md:text-5xl font-ouroboros mb-12 trunctate">
+              <div className="flex flex-col flex-1">
+                <h2 className="text-3xl md:text-5xl font-ouroboros mb-12 trunctate self-center">
                   {t('common:dispositive.title')}
                 </h2>
-                <p
-                  className="text-xl font-plex mb-12 paragraph-desc md:max-w-prose"
-                  dangerouslySetInnerHTML={{ __html: dispositifMobile.description }}
-                />
-                <a href={dispositifMobile.brochure.url} target="_blank" rel="noreferrer">
-                  {t('common:dispositive.cta')}
-                </a>
+                <div className="flex flex-col md:flex-row md:justify-center flex-1">
+                  <div className="md:flex-1 max-w-screen-md mb-4 md:mb-0">
+                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                    <Image
+                      className="relative"
+                      data={dispositifMobile.image.responsiveImage as ResponsiveImageType}
+                    />
+                  </div>
+                  <div className="md:flex-1 md:ml-12 md:max-w-prose">
+                    <p
+                      className="text-xl font-plex mb-12 paragraph-desc"
+                      dangerouslySetInnerHTML={{ __html: dispositifMobile.description }}
+                    />
+                    <a href={dispositifMobile.brochure.url} target="_blank" rel="noreferrer">
+                      {t('common:dispositive.cta')}
+                    </a>
+                  </div>
+                </div>
               </div>
             </SimpleBar>
           </motion.div>

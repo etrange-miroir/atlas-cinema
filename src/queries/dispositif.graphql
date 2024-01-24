@@ -4,5 +4,8 @@ query getDispositif($locale: SiteLocale) {
     brochure {
       ...DownloadableDocument
     }
+    image {
+      ...Image
+    }
   }
 }

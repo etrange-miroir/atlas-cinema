@@ -225,6 +225,7 @@ export type DispositifMobileRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   description: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
+  image: Maybe<FileField>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -2727,6 +2728,23 @@ export type GetDispositifQuery = {
     __typename?: 'DispositifMobileRecord';
     description: string;
     brochure: { __typename?: 'FileField'; url: string };
+    image: {
+      __typename?: 'FileField';
+      responsiveImage: {
+        __typename?: 'ResponsiveImage';
+        srcSet: string;
+        webpSrcSet: string;
+        sizes: string;
+        src: string;
+        width: number;
+        height: number;
+        aspectRatio: any;
+        alt: string;
+        title: string;
+        bgColor: string;
+        base64: string;
+      };
+    };
   };
 };
 
@@ -2877,9 +2895,13 @@ export const GetDispositifDocument = gql`
       brochure {
         ...DownloadableDocument
       }
+      image {
+        ...Image
+      }
     }
   }
   ${DownloadableDocumentFragmentDoc}
+  ${ImageFragmentDoc}
 `;
 export const GetEtapesDocument = gql`
   query getEtapes($locale: SiteLocale) {
