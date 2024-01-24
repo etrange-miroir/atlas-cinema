@@ -12,5 +12,9 @@
   },
   "about": {
     "title": "ABOUT"
+  },
+  "dispositive": {
+    "title": "MOBILE DEVICE",
+    "cta": "DOWNLOAD OUR CATALOG"
   }
 }

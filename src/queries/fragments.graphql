@@ -27,6 +27,10 @@ fragment CarteAsset on FileField {
   height
 }
 
+fragment DownloadableDocument on FileField {
+  url
+}
+
 fragment HexColor on ColorField {
   hex
 }

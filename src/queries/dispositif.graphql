@@ -1,0 +1,8 @@
+query getDispositif($locale: SiteLocale) {
+  dispositifMobile {
+    description(markdown: true, locale: $locale)
+    brochure {
+      ...DownloadableDocument
+    }
+  }
+}

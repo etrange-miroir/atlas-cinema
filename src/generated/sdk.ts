@@ -34,12 +34,14 @@ export type AboutRecord = RecordInterface & {
   __typename?: 'AboutRecord';
   _allTextLocales: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -77,12 +79,14 @@ export type BooleanFilter = {
 export type CarteRecord = RecordInterface & {
   __typename?: 'CarteRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -129,6 +133,7 @@ export type ColorField = {
   __typename?: 'ColorField';
   alpha: Scalars['IntType'];
   blue: Scalars['IntType'];
+  cssRgb: Scalars['String'];
   green: Scalars['IntType'];
   hex: Scalars['String'];
   red: Scalars['IntType'];
@@ -138,12 +143,14 @@ export type ColorField = {
 export type CoordonneeRecord = RecordInterface & {
   __typename?: 'CoordonneeRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -196,7 +203,50 @@ export type DateFilter = {
   neq: InputMaybe<Scalars['Date']>;
 };
 
+/** Record of type Dispositif Mobile (dispositif_mobile) */
+export type DispositifMobileRecord = RecordInterface & {
+  __typename?: 'DispositifMobileRecord';
+  _allDescriptionLocales: Maybe<Array<StringMultiLocaleField>>;
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _locales: Array<SiteLocale>;
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  brochure: Maybe<FileField>;
+  createdAt: Scalars['DateTime'];
+  description: Maybe<Scalars['String']>;
+  id: Scalars['ItemId'];
+  updatedAt: Scalars['DateTime'];
+};
+
+/** Record of type Dispositif Mobile (dispositif_mobile) */
+export type DispositifMobileRecord_AllDescriptionLocalesArgs = {
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Record of type Dispositif Mobile (dispositif_mobile) */
+export type DispositifMobileRecord_SeoMetaTagsArgs = {
+  locale: InputMaybe<SiteLocale>;
+};
+
+/** Record of type Dispositif Mobile (dispositif_mobile) */
+export type DispositifMobileRecordDescriptionArgs = {
+  locale: InputMaybe<SiteLocale>;
+  markdown: InputMaybe<Scalars['Boolean']>;
+};
+
 export type EtapeModelFilter = {
+  AND: InputMaybe<Array<InputMaybe<EtapeModelFilter>>>;
   OR: InputMaybe<Array<InputMaybe<EtapeModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -264,13 +314,15 @@ export type EtapeRecord = RecordInterface & {
   _allDescriptionLocales: Maybe<Array<StringMultiLocaleField>>;
   _allNomLocales: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _locales: Array<SiteLocale>;
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -329,6 +381,8 @@ export enum FaviconType {
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
+  /** The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request */
+  _editingUrl: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt: Maybe<Scalars['String']>;
   author: Maybe<Scalars['String']>;
@@ -351,6 +405,7 @@ export type FileField = FileFieldInterface & {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
@@ -364,9 +419,9 @@ export type FileFieldAltArgs = {
 
 export type FileFieldBlurUpThumbArgs = {
   imgixParams: InputMaybe<ImgixParams>;
-  punch?: InputMaybe<Scalars['Float']>;
-  quality?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  punch?: Scalars['Float'];
+  quality?: Scalars['Int'];
+  size?: Scalars['Int'];
 };
 
 export type FileFieldCustomDataArgs = {
@@ -397,6 +452,8 @@ export type FileFieldUrlArgs = {
 
 export type FileFieldInterface = {
   _createdAt: Scalars['DateTime'];
+  /** The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request */
+  _editingUrl: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt: Maybe<Scalars['String']>;
   author: Maybe<Scalars['String']>;
@@ -419,6 +476,7 @@ export type FileFieldInterface = {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
@@ -432,9 +490,9 @@ export type FileFieldInterfaceAltArgs = {
 
 export type FileFieldInterfaceBlurUpThumbArgs = {
   imgixParams: InputMaybe<ImgixParams>;
-  punch?: InputMaybe<Scalars['Float']>;
-  quality?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  punch?: Scalars['Float'];
+  quality?: Scalars['Int'];
+  size?: Scalars['Int'];
 };
 
 export type FileFieldInterfaceCustomDataArgs = {
@@ -513,6 +571,14 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/bg)
    */
   bg: InputMaybe<Scalars['String']>;
+  /**
+   * Background Removal
+   *
+   * Removes background from image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/rendering/background-removal/bg-remove)
+   */
+  bgRemove: InputMaybe<Scalars['BooleanType']>;
   /**
    * Blend
    *
@@ -966,6 +1032,18 @@ export type ImgixParams = {
    */
   fpZ: InputMaybe<Scalars['FloatType']>;
   /**
+   * Frames Per Second
+   *
+   * Specifies the framerate of the generated image.
+   */
+  fps: InputMaybe<Scalars['IntType']>;
+  /**
+   * Frame Selection
+   *
+   * Specifies the frame of an animated image to use.
+   */
+  frame: InputMaybe<Scalars['String']>;
+  /**
    * Gamma
    *
    * Adjusts the gamma of the source image.
@@ -973,6 +1051,12 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/gam)
    */
   gam: InputMaybe<Scalars['IntType']>;
+  /**
+   * Animated Gif Quality
+   *
+   * Depends on: `fm=gif`
+   */
+  gifQ: InputMaybe<Scalars['IntType']>;
   /**
    * Grid Colors
    *
@@ -1022,6 +1106,12 @@ export type ImgixParams = {
    */
   hue: InputMaybe<Scalars['IntType']>;
   /**
+   * Frame Interval
+   *
+   * Displays every Nth frame starting with the first frame.
+   */
+  interval: InputMaybe<Scalars['IntType']>;
+  /**
    * Invert
    *
    * Inverts the colors on the source image.
@@ -1035,6 +1125,12 @@ export type ImgixParams = {
    * Determine if IPTC data should be passed for JPEG images.
    */
   iptc: InputMaybe<ImgixParamsIptc>;
+  /**
+   * Animation Loop Count
+   *
+   * Specifies the number of times an animated image should repeat. A value of 0 means infinite looping.
+   */
+  loop: InputMaybe<Scalars['IntType']>;
   /**
    * Lossless Compression
    *
@@ -1362,6 +1458,12 @@ export type ImgixParams = {
    */
   rect: InputMaybe<Scalars['String']>;
   /**
+   * Reverse
+   *
+   * Reverses the frame order on the source animation.
+   */
+  reverse: InputMaybe<Scalars['BooleanType']>;
+  /**
    * Rotation
    *
    * Rotates an image by a specified number of degrees.
@@ -1401,6 +1503,12 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sharp)
    */
   sharp: InputMaybe<Scalars['FloatType']>;
+  /**
+   * Frame Skip
+   *
+   * Skips every Nth frame starting with the first frame.
+   */
+  skip: InputMaybe<Scalars['IntType']>;
   /**
    * Transparency
    *
@@ -1878,12 +1986,14 @@ export enum ItemStatus {
 export type LienRecord = RecordInterface & {
   __typename?: 'LienRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -1948,7 +2058,7 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allEtapesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
-  _allUploadsMeta: Maybe<CollectionMetadata>;
+  _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns the single instance record */
@@ -1959,6 +2069,8 @@ export type Query = {
   allUploads: Array<FileField>;
   /** Returns the single instance record */
   carte: Maybe<CarteRecord>;
+  /** Returns the single instance record */
+  dispositifMobile: Maybe<DispositifMobileRecord>;
   /** Returns a specific record */
   etape: Maybe<EtapeRecord>;
   /** Returns a specific asset */
@@ -2017,6 +2129,12 @@ export type QueryCarteArgs = {
 };
 
 /** The query root for this schema */
+export type QueryDispositifMobileArgs = {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  locale: InputMaybe<SiteLocale>;
+};
+
+/** The query root for this schema */
 export type QueryEtapeArgs = {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<EtapeModelFilter>;
@@ -2034,12 +2152,14 @@ export type QueryUploadArgs = {
 
 export type RecordInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl: Maybe<Scalars['String']>;
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
   _publicationScheduledAt: Maybe<Scalars['DateTime']>;
   _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
@@ -2089,6 +2209,7 @@ export type SeoField = {
   __typename?: 'SeoField';
   description: Maybe<Scalars['String']>;
   image: Maybe<FileField>;
+  noIndex: Maybe<Scalars['BooleanType']>;
   title: Maybe<Scalars['String']>;
   twitterCard: Maybe<Scalars['String']>;
 };
@@ -2099,6 +2220,7 @@ export type Site = {
   faviconMetaTags: Array<Tag>;
   globalSeo: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
+  noIndex: Maybe<Scalars['BooleanType']>;
 };
 
 export type SiteFaviconMetaTagsArgs = {
@@ -2131,12 +2253,14 @@ export type StatusFilter = {
 export type StringFilter = {
   /** Search for records with an exact match */
   eq: InputMaybe<Scalars['String']>;
-  /** Filter records with the specified field defined (i.e. with any value) or not */
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records that equal one of the specified values */
   in: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Filter records with the specified field set as blank (null or empty string) */
   isBlank: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent: InputMaybe<Scalars['BooleanType']>;
   /** Filter records based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude records with an exact match */
@@ -2168,10 +2292,12 @@ export type Tag = {
 
 /** Specifies how to filter text fields */
 export type TextFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records with the specified field set as blank (null or empty string) */
   isBlank: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent: InputMaybe<Scalars['BooleanType']>;
   /** Filter records based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude records based on a regular expression */
@@ -2293,6 +2419,7 @@ export type UploadFilenameFilter = {
 };
 
 export type UploadFilter = {
+  AND: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   OR: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   _createdAt: InputMaybe<UploadCreatedAtFilter>;
   _updatedAt: InputMaybe<UploadUpdatedAtFilter>;
@@ -2590,6 +2717,19 @@ export type GetCarteQuery = {
   };
 };
 
+export type GetDispositifQueryVariables = Exact<{
+  locale: InputMaybe<SiteLocale>;
+}>;
+
+export type GetDispositifQuery = {
+  __typename?: 'Query';
+  dispositifMobile: {
+    __typename?: 'DispositifMobileRecord';
+    description: string;
+    brochure: { __typename?: 'FileField'; url: string };
+  };
+};
+
 export type GetEtapesQueryVariables = Exact<{
   locale: InputMaybe<SiteLocale>;
 }>;
@@ -2653,6 +2793,8 @@ export type CarteAssetFragment = {
   height: number;
 };
 
+export type DownloadableDocumentFragment = { __typename?: 'FileField'; url: string };
+
 export type HexColorFragment = { __typename?: 'ColorField'; hex: string };
 
 export const ImageFragmentDoc = gql`
@@ -2677,6 +2819,11 @@ export const CarteAssetFragmentDoc = gql`
     url
     width
     height
+  }
+`;
+export const DownloadableDocumentFragmentDoc = gql`
+  fragment DownloadableDocument on FileField {
+    url
   }
 `;
 export const HexColorFragmentDoc = gql`
@@ -2722,6 +2869,17 @@ export const GetCarteDocument = gql`
   }
   ${CarteAssetFragmentDoc}
   ${HexColorFragmentDoc}
+`;
+export const GetDispositifDocument = gql`
+  query getDispositif($locale: SiteLocale) {
+    dispositifMobile {
+      description(markdown: true, locale: $locale)
+      brochure {
+        ...DownloadableDocument
+      }
+    }
+  }
+  ${DownloadableDocumentFragmentDoc}
 `;
 export const GetEtapesDocument = gql`
   query getEtapes($locale: SiteLocale) {
@@ -2786,6 +2944,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'getCarte'
+      );
+    },
+    getDispositif(
+      variables?: GetDispositifQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetDispositifQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetDispositifQuery>(GetDispositifDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getDispositif'
       );
     },
     getEtapes(
